@@ -78,16 +78,16 @@ The prepared snapshot currently uses `{current}` (`{manifest['revision']}`).
 Update the pinned source and regenerate the prepared files:
 
 ```sh
-git submodule update --init --checkout vendor/openssl
-git -C vendor/openssl fetch origin tag {latest}
-git -C vendor/openssl checkout --detach {latest}
+git submodule update --init --checkout Vendor/openssl
+git -C Vendor/openssl fetch origin tag {latest}
+git -C Vendor/openssl checkout --detach {latest}
 python3 Scripts/generate-openssl-sources.py
 python3 Scripts/generate-openssl-sources.py --check
 swift build
 swift test
 ```
 
-Review `vendor/openssl/VERSION.dat` and confirm `PRE_RELEASE_TAG` is empty.
+Review `Vendor/openssl/VERSION.dat` and confirm `PRE_RELEASE_TAG` is empty.
 Commit the submodule pin, prepared sources and `Package.swift` fingerprint together after CI passes.
 Then update the SwiftSFTP-OpenSSL submodule in SwiftSFTP, refresh its manifest fingerprint,
 and run the SwiftSFTP tests and the crypto coexistence consumer tests.

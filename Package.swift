@@ -3,7 +3,7 @@
 import PackageDescription
 
 // BEGIN OPENSSL SOURCE MANIFEST
-// OpenSSL source manifest SHA-256: b502af822741fbc662c993894a65ff3f31167f32f709e5b3f1972f7ca17fdd17
+// OpenSSL source manifest SHA-256: 904706bc4148b58438cf3a9e064b5660b22948cc404e281859fbbc01b106343b
 let opensslSourcePaths: [String] = [
     "crypto",
     "providers",

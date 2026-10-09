@@ -1,4 +1,4 @@
 [submodule "vendor/openssl"]
-	path = vendor/openssl
+	path = Vendor/openssl
 	url = https://github.com/openssl/openssl.git
 	update = none

@@ -9,7 +9,7 @@ there are no precompiled binaries or consumer-side generation tools.
 
 | Path | Purpose |
 | --- | --- |
-| `vendor/openssl` | Upstream OpenSSL, pinned to an exact stable release tag |
+| `Vendor/openssl` | Upstream OpenSSL, pinned to an exact stable release tag |
 | `Scripts/generate-openssl-sources.py` | Reproducible source preparation and adaptations |
 | `Sources/OpenSSLCrypto` | Prepared portable C source snapshot, headers and upstream license |
 | `Sources/OpenSSLCrypto/UPSTREAM.json` | Upstream revision, release tag, configuration and file hashes |
@@ -22,7 +22,7 @@ source revision. The original OpenSSL checkout is used only by maintainers and v
 it is never modified or compiled directly by consumers.
 Its `update = none` submodule setting keeps consumer checkouts small and avoids
 fetching OpenSSL's unrelated test submodules. Maintainers initialize it explicitly
-with `git submodule update --init --checkout vendor/openssl` before preparation.
+with `git submodule update --init --checkout Vendor/openssl` before preparation.
 
 ## Configuration
 
@@ -48,9 +48,9 @@ and committed by a maintainer.
 git clone --recurse-submodules https://github.com/RuiNelson/SwiftSFTP-OpenSSL.git
 cd SwiftSFTP-OpenSSL
 python3 Scripts/check-openssl-release.py
-git submodule update --init --checkout vendor/openssl
-git -C vendor/openssl fetch origin tag openssl-X.Y.Z
-git -C vendor/openssl checkout --detach openssl-X.Y.Z
+git submodule update --init --checkout Vendor/openssl
+git -C Vendor/openssl fetch origin tag openssl-X.Y.Z
+git -C Vendor/openssl checkout --detach openssl-X.Y.Z
 python3 Scripts/generate-openssl-sources.py
 python3 Scripts/generate-openssl-sources.py --check
 python3 -m unittest discover -s Tests/Scripts
@@ -59,7 +59,7 @@ swift test
 ./format.sh
 ```
 
-Confirm `PRE_RELEASE_TAG` in `vendor/openssl/VERSION.dat` is empty. Review upstream changes
+Confirm `PRE_RELEASE_TAG` in `Vendor/openssl/VERSION.dat` is empty. Review upstream changes
 and commit the pin, prepared sources and manifest fingerprint together. Maintainers need
 Python 3.9+, Perl and Make for preparation; consumers need only SwiftPM and the destination SDK.
 The generator preserves upstream license notices and records all adaptations in the script.
@@ -67,7 +67,7 @@ It also embeds source directories and exclusions in `Package.swift`, with a snap
 fingerprint. The manifest is self-contained, so SwiftPM can evaluate it while resolving
 a remote Git dependency before checking out the prepared source tree.
 
-After publishing the commit, update `vendor/SwiftSFTP-OpenSSL` in SwiftSFTP and run its
+After publishing the commit, update `Vendor/SwiftSFTP-OpenSSL` in SwiftSFTP and run its
 `Scripts/update-openssl-manifest.py` to refresh the parent manifest fingerprint. Validate
 SwiftSFTP's package and crypto coexistence tests before committing the new submodule pin.
 

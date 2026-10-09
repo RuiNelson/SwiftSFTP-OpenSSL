@@ -2,7 +2,7 @@
 
 This repository maintains the OpenSSL sources prepared for SwiftSFTP's native SwiftPM builds.
 
-- `vendor/openssl` is a read-only upstream submodule. Upgrade its pin only to an exact stable
+- `Vendor/openssl` is a read-only upstream submodule. Upgrade its pin only to an exact stable
   `openssl-X.Y.Z` tag. Confirm `PRE_RELEASE_TAG` in `VERSION.dat` is empty.
 - `Sources/OpenSSLCrypto/` is generated. Modify `Scripts/generate-openssl-sources.py`, then
   regenerate; do not edit prepared C sources or headers by hand.
@@ -12,7 +12,7 @@ This repository maintains the OpenSSL sources prepared for SwiftSFTP's native Sw
 - Consumer builds compile committed portable C directly. Do not add binary targets or
   build-time downloads, plugins, Perl or Make requirements.
 - Keep the upstream submodule's `update = none` setting. Maintainers and CI initialize
-  it explicitly with `git submodule update --init --checkout vendor/openssl`;
+  it explicitly with `git submodule update --init --checkout Vendor/openssl`;
   consumers do not fetch the original source or its unrelated test submodules.
 - The daily release workflow opens an Issue. It does not update pins or publish automatically.
 - Run source generation with `--check`, the Python release-check tests, `swift build` and

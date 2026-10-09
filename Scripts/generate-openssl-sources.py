@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Prepare the pinned OpenSSL libcrypto sources for native SwiftPM builds.
 
-Only maintainers run this script, after updating vendor/openssl. Consumers build
+Only maintainers run this script, after updating Vendor/openssl. Consumers build
 the committed C sources with SwiftPM, without Perl, Make, plugins, or binaries.
 The submodule is read-only; Configure and source generation run in a temporary
 directory. --check regenerates everything and detects stale committed sources.
@@ -17,7 +17,7 @@ import subprocess
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-UPSTREAM = ROOT / "vendor/openssl"
+UPSTREAM = ROOT / "Vendor/openssl"
 OUTPUT = ROOT / "Sources/OpenSSLCrypto"
 OPTIONS = [
     "no-asm", "no-shared", "no-module", "no-tests", "no-apps", "no-docs",
@@ -53,8 +53,8 @@ def adapt(contents):
     contents = re.sub(r'^\s*#\s*include\s*<([^>\n]+)>[^\n]*', system_include,
                       contents, flags=re.MULTILINE)
     # Configure's generated comments otherwise depend on the checkout location.
-    contents = re.sub(r'(?:\.\./)+[^\n,]*?/vendor/openssl/', "vendor/openssl/", contents)
-    contents = contents.replace(str(UPSTREAM), "vendor/openssl")
+    contents = re.sub(r'(?:\.\./)+[^\n,]*?/Vendor/openssl/', "Vendor/openssl/", contents)
+    contents = contents.replace(str(UPSTREAM), "Vendor/openssl")
     return contents
 
 
@@ -194,7 +194,7 @@ def generate(directory):
     files["LICENSE.txt"] = (UPSTREAM / "LICENSE.txt").read_text()
     version = (UPSTREAM / "VERSION.dat").read_text()
     if not re.search(r"^PRE_RELEASE_TAG=\s*$", version, re.MULTILINE):
-        raise SystemExit("vendor/openssl must be pinned to a stable release")
+        raise SystemExit("Vendor/openssl must be pinned to a stable release")
     revision = run(["git", "rev-parse", "HEAD"], UPSTREAM, environment).strip()
     tag = run(["git", "describe", "--tags", "--exact-match", "HEAD"], UPSTREAM, environment).strip()
     if not re.fullmatch(r"openssl-\d+\.\d+\.\d+", tag):
@@ -216,7 +216,7 @@ def main():
     parser.add_argument("--check", action="store_true", help="Verify the committed source snapshot")
     args = parser.parse_args()
     if not (UPSTREAM / "Configure").is_file():
-        raise SystemExit("Initialize vendor/openssl before generating its SwiftPM sources")
+        raise SystemExit("Initialize Vendor/openssl before generating its SwiftPM sources")
     with tempfile.TemporaryDirectory(prefix="swiftsftp-openssl-") as temporary:
         files = generate(Path(temporary).resolve())
     # SwiftPM evaluates remote manifests before materializing their source tree.

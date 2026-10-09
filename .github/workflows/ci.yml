@@ -32,7 +32,7 @@ jobs:
         run: python3 -m unittest discover -s Tests/Scripts
       - name: Verify prepared OpenSSL sources
         run: |
-          git submodule update --init --checkout vendor/openssl
+          git submodule update --init --checkout Vendor/openssl
           python3 Scripts/generate-openssl-sources.py --check
       - name: Build
         run: swift build
@@ -51,12 +51,12 @@ jobs:
           apt-get update -q
           apt-get install -y python3 perl make
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git config --global --add safe.directory "$GITHUB_WORKSPACE/vendor/openssl"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/Vendor/openssl"
       - name: Test release detection and Issue deduplication
         run: python3 -m unittest discover -s Tests/Scripts
       - name: Verify prepared OpenSSL sources
         run: |
-          git submodule update --init --checkout vendor/openssl
+          git submodule update --init --checkout Vendor/openssl
           python3 Scripts/generate-openssl-sources.py --check
       - name: Build
         run: swift build
