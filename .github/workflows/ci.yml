@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  sources:
+    strategy:
+      matrix:
+        os: [macos-15, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          submodules: recursive
+      - uses: swift-actions/setup-swift@v3
+        with:
+          swift-version: "6.3.2"
+      - name: Test release detection and Issue deduplication
+        run: python3 -m unittest discover -s Tests/Scripts
+      - name: Verify prepared OpenSSL sources
+        run: python3 Scripts/generate-openssl-sources.py --check
+      - name: Build
+        run: swift build
+      - name: Test cryptographic operations
+        run: swift test
