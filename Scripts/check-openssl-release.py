@@ -78,6 +78,7 @@ The prepared snapshot currently uses `{current}` (`{manifest['revision']}`).
 Update the pinned source and regenerate the prepared files:
 
 ```sh
+git submodule update --init --checkout vendor/openssl
 git -C vendor/openssl fetch origin tag {latest}
 git -C vendor/openssl checkout --detach {latest}
 python3 Scripts/generate-openssl-sources.py

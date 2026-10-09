@@ -20,6 +20,9 @@ SwiftSFTP includes this repository as a submodule and builds its `OpenSSLCrypto`
 directly from the prepared snapshot. Each SwiftSFTP commit therefore selects an exact
 source revision. The original OpenSSL checkout is used only by maintainers and verification;
 it is never modified or compiled directly by consumers.
+Its `update = none` submodule setting keeps consumer checkouts small and avoids
+fetching OpenSSL's unrelated test submodules. Maintainers initialize it explicitly
+with `git submodule update --init --checkout vendor/openssl` before preparation.
 
 ## Configuration
 
@@ -45,6 +48,7 @@ and committed by a maintainer.
 git clone --recurse-submodules https://github.com/RuiNelson/SwiftSFTP-OpenSSL.git
 cd SwiftSFTP-OpenSSL
 python3 Scripts/check-openssl-release.py
+git submodule update --init --checkout vendor/openssl
 git -C vendor/openssl fetch origin tag openssl-X.Y.Z
 git -C vendor/openssl checkout --detach openssl-X.Y.Z
 python3 Scripts/generate-openssl-sources.py

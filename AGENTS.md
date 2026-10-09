@@ -11,6 +11,9 @@ This repository maintains the OpenSSL sources prepared for SwiftSFTP's native Sw
   hidden internal symbols and all upstream license notices.
 - Consumer builds compile committed portable C directly. Do not add binary targets or
   build-time downloads, plugins, Perl or Make requirements.
+- Keep the upstream submodule's `update = none` setting. Maintainers and CI initialize
+  it explicitly with `git submodule update --init --checkout vendor/openssl`;
+  consumers do not fetch the original source or its unrelated test submodules.
 - The daily release workflow opens an Issue. It does not update pins or publish automatically.
 - Run source generation with `--check`, the Python release-check tests, `swift build` and
   `swift test` after source or package changes. Validate SwiftSFTP's crypto coexistence

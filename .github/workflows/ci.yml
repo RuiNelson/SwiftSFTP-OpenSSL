@@ -18,11 +18,8 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  sources:
-    strategy:
-      matrix:
-        os: [macos-15, ubuntu-24.04]
-    runs-on: ${{ matrix.os }}
+  macos:
+    runs-on: macos-15
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v5
@@ -34,7 +31,31 @@ jobs:
       - name: Test release detection and Issue deduplication
         run: python3 -m unittest discover -s Tests/Scripts
       - name: Verify prepared OpenSSL sources
-        run: python3 Scripts/generate-openssl-sources.py --check
+        run: |
+          git submodule update --init --checkout vendor/openssl
+          python3 Scripts/generate-openssl-sources.py --check
+      - name: Build
+        run: swift build
+      - name: Test cryptographic operations
+        run: swift test
+
+  linux:
+    runs-on: ubuntu-24.04
+    container:
+      image: swift:6.3-noble
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install source verification tools
+        run: |
+          apt-get update -q
+          apt-get install -y python3 perl make
+      - name: Test release detection and Issue deduplication
+        run: python3 -m unittest discover -s Tests/Scripts
+      - name: Verify prepared OpenSSL sources
+        run: |
+          git submodule update --init --checkout vendor/openssl
+          python3 Scripts/generate-openssl-sources.py --check
       - name: Build
         run: swift build
       - name: Test cryptographic operations
