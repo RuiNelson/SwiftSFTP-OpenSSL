@@ -219,18 +219,28 @@ def main():
         raise SystemExit("Initialize vendor/openssl before generating its SwiftPM sources")
     with tempfile.TemporaryDirectory(prefix="swiftsftp-openssl-") as temporary:
         files = generate(Path(temporary).resolve())
-    # Manifest evaluation caches do not track arbitrary JSON files it reads.
-    # Refresh this generated stamp when the snapshot changes, so SwiftPM/Xcode
-    # re-evaluate the source/exclude lists after an OpenSSL update.
+    # SwiftPM evaluates remote manifests before materializing their source tree.
+    # Keep source directories and exclusions in the manifest itself; it cannot
+    # read UPSTREAM.json at evaluation time. Refresh the stamp with the snapshot.
     manifest_path = ROOT / "Package.swift"
     manifest = manifest_path.read_text()
     digest = hashlib.sha256(files["UPSTREAM.json"].encode()).hexdigest()
+    snapshot = json.loads(files["UPSTREAM.json"])
+    source_roots = sorted({Path(source).parts[0] for source in snapshot["sources"]})
+    source_manifest = "// BEGIN OPENSSL SOURCE MANIFEST\n"
+    source_manifest += f"// OpenSSL source manifest SHA-256: {digest}\n"
+    for name, paths in [("opensslSourcePaths", source_roots),
+                        ("opensslExcludedPaths", snapshot["excluded"])]:
+        source_manifest += f"let {name}: [String] = [\n"
+        source_manifest += "".join(f"    {json.dumps(path)},\n" for path in paths)
+        source_manifest += "]\n"
+    source_manifest += "// END OPENSSL SOURCE MANIFEST"
     expected_manifest, count = re.subn(
-        r"// OpenSSL source manifest SHA-256: \S+",
-        f"// OpenSSL source manifest SHA-256: {digest}", manifest,
+        r"// BEGIN OPENSSL SOURCE MANIFEST\n.*?// END OPENSSL SOURCE MANIFEST",
+        lambda _: source_manifest, manifest, flags=re.DOTALL,
     )
     if count != 1:
-        raise SystemExit("Missing source manifest fingerprint in Package.swift")
+        raise SystemExit("Missing generated source manifest block in Package.swift")
     if args.check:
         if manifest != expected_manifest:
             raise SystemExit("Stale OpenSSL manifest fingerprint; run Scripts/generate-openssl-sources.py")

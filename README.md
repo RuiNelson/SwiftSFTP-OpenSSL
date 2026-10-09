@@ -63,6 +63,9 @@ Confirm `PRE_RELEASE_TAG` in `vendor/openssl/VERSION.dat` is empty. Review upstr
 and commit the pin, prepared sources and manifest fingerprint together. Maintainers need
 Python 3.9+, Perl and Make for preparation; consumers need only SwiftPM and the destination SDK.
 The generator preserves upstream license notices and records all adaptations in the script.
+It also embeds source directories and exclusions in `Package.swift`, with a snapshot
+fingerprint. The manifest is self-contained, so SwiftPM can evaluate it while resolving
+a remote Git dependency before checking out the prepared source tree.
 
 After publishing the commit, update `vendor/SwiftSFTP-OpenSSL` in SwiftSFTP and run its
 `Scripts/update-openssl-manifest.py` to refresh the parent manifest fingerprint. Validate
