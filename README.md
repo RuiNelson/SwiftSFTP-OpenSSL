@@ -36,11 +36,13 @@ Public headers use the `SwiftSFTP_OpenSSL/` namespace. Public C functions keep t
 names and receive private `SwiftSFTP_OpenSSL_` linker names; internal symbols are hidden.
 This prevents interference from another SDK's OpenSSL/BoringSSL headers or symbols.
 
-The generator suppresses Clang's `-Wshorten-64-to-32` diagnostics inside each prepared
-C translation unit, so Xcode does not report OpenSSL's upstream integer conversions
-hundreds of times. Other warnings remain enabled, and the suppression does not apply
-to public headers imported by consumers or to application code. No unsafe SwiftPM
-compiler flags are needed.
+The `OpenSSLCrypto` target uses SwiftPM's `.disableWarning("conversion")` and
+`.disableWarning("double-promotion")` settings to suppress Clang's implicit-conversion
+warnings, including integer narrowing, signedness, floating-point, boolean and enum
+conversions, as well as promotion from `float` to `double`. Other warnings remain
+enabled. These settings apply only when compiling the OpenSSL target; consumer code
+keeps its normal diagnostics. No warning pragmas or unsafe SwiftPM compiler flags
+are needed.
 
 ## Updating OpenSSL
 

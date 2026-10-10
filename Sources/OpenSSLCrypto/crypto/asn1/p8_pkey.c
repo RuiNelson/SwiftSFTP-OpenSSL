@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -116,7 +112,3 @@ int PKCS8_pkey_add1_attr(PKCS8_PRIV_KEY_INFO *p8, X509_ATTRIBUTE *attr)
 {
     return (X509at_add1_attr(&p8->attributes, attr) != NULL);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

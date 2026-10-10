@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -109,8 +105,4 @@ void ossl_gf_sqr(gf_s *RESTRICT cs, const gf as)
 {
     ossl_gf_mul(cs, as, as); /* Performs better with a dedicated square */
 }
-#endif
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
 #endif

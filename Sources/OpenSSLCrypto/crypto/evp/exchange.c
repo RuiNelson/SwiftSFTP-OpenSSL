@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -637,7 +633,3 @@ const OSSL_PARAM *EVP_KEYEXCH_settable_ctx_params(const EVP_KEYEXCH *keyexch)
     provctx = ossl_provider_ctx(EVP_KEYEXCH_get0_provider(keyexch));
     return keyexch->settable_ctx_params(NULL, provctx);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -38,7 +34,3 @@ int AES_unwrap_key(AES_KEY *key, const unsigned char *iv,
     return (int)CRYPTO_128_unwrap(key, iv, out, in, inlen,
         (block128_f)AES_decrypt);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

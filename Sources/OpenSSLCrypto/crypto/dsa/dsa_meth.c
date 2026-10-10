@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -220,8 +216,4 @@ int DSA_meth_set_keygen(DSA_METHOD *dsam, int (*keygen)(DSA *))
     dsam->dsa_keygen = keygen;
     return 1;
 }
-#endif
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
 #endif

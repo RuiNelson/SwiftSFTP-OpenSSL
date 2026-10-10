@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -509,7 +505,3 @@ void *CRYPTO_get_ex_data(const CRYPTO_EX_DATA *ad, int idx)
         return NULL;
     return sk_void_value(ad->sk, idx);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -475,7 +471,3 @@ int RSA_verify(int type, const unsigned char *m, unsigned int m_len,
 
     return ossl_rsa_verify(type, m, m_len, NULL, NULL, sigbuf, siglen, rsa);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

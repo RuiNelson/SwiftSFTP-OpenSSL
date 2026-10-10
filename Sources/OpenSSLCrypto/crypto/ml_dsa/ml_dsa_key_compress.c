@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -180,7 +176,3 @@ uint32_t ossl_ml_dsa_key_compress_use_hint(uint32_t hint, uint32_t r,
             return (r1 == 0) ? 43 : r1 - 1;
     }
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

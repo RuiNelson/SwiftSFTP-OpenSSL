@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -238,7 +234,3 @@ ASN1_OCTET_STRING *PKCS12_item_i2d_encrypt(X509_ALGOR *algor,
 {
     return PKCS12_item_i2d_encrypt_ex(algor, it, pass, passlen, obj, zbuf, NULL, NULL);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

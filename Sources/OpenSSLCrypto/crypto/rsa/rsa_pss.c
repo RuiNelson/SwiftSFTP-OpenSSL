@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -430,8 +426,4 @@ int ossl_rsa_pss_params_30_trailerfield(const RSA_PSS_PARAMS_30 *rsa_pss_params)
 
 #if defined(_MSC_VER)
 #pragma optimize("", on)
-#endif
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
 #endif

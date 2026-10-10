@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -43,7 +39,3 @@ void CAST_ecb_encrypt(const unsigned char *in, unsigned char *out,
     l2n(l, out);
     l = d[0] = d[1] = 0;
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

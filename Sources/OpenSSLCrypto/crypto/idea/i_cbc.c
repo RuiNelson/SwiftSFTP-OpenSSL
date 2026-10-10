@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -134,7 +130,3 @@ void IDEA_encrypt(unsigned long *d, IDEA_KEY_SCHEDULE *key)
     d[0] = (t0 & 0xffff) | ((x1 & 0xffff) << 16);
     d[1] = (x4 & 0xffff) | ((t1 & 0xffff) << 16);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

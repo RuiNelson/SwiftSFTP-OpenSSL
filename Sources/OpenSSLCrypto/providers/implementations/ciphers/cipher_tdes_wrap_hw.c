@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -25,7 +21,3 @@
 #define ossl_cipher_hw_tdes_wrap_initkey ossl_cipher_hw_tdes_ede3_initkey
 
 PROV_CIPHER_HW_tdes_mode(wrap, cbc)
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

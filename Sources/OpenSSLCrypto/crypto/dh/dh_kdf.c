@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -87,7 +83,3 @@ int DH_KDF_X9_42(unsigned char *out, size_t outlen,
         ukm, ukmlen, md, libctx, NULL);
 }
 #endif /* !defined(FIPS_MODULE) */
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

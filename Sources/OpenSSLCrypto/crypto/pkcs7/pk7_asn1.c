@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -260,7 +256,3 @@ ASN1_ITEM_TEMPLATE(PKCS7_ATTR_VERIFY) = ASN1_EX_TEMPLATE_TYPE(ASN1_TFLG_SEQUENCE
 ASN1_ITEM_TEMPLATE_END(PKCS7_ATTR_VERIFY)
 
 IMPLEMENT_ASN1_PRINT_FUNCTION(PKCS7)
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

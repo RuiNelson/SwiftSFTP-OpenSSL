@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -191,7 +187,3 @@ const SLH_ADRS_FUNC *ossl_slh_get_adrs_fn(int is_compressed)
     };
     return &methods[is_compressed == 0 ? 0 : 1];
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

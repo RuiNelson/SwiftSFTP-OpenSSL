@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -467,7 +463,3 @@ size_t ossl_dh_key2buf(const DH *dh, unsigned char **pbuf_out, size_t size,
     }
     return p_size;
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

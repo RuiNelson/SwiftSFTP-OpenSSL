@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -227,7 +223,3 @@ int ossl_dh_check_key(const DH *dh)
     return (L == 2048 && (N == 224 || N == 256));
 }
 #endif /* OPENSSL_NO_DH */
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

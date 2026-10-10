@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -57,7 +53,3 @@ IMPLEMENT_generic_cipher(sm4, SM4, ctr, CTR, 0, 128, 8, 128, stream)
 IMPLEMENT_generic_cipher(sm4, SM4, ofb128, OFB, 0, 128, 8, 128, stream)
 /* ossl_sm4128cfb128_functions */
 IMPLEMENT_generic_cipher(sm4, SM4, cfb128, CFB, 0, 128, 8, 128, stream)
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

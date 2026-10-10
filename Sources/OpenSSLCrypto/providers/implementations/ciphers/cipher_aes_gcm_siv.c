@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -311,7 +307,3 @@ static const OSSL_PARAM *ossl_aes_gcm_siv_settable_ctx_params(ossl_unused void *
 IMPLEMENT_cipher(aes, gcm_siv, GCM_SIV, AEAD_FLAGS, 128, 8, 96);
 IMPLEMENT_cipher(aes, gcm_siv, GCM_SIV, AEAD_FLAGS, 192, 8, 96);
 IMPLEMENT_cipher(aes, gcm_siv, GCM_SIV, AEAD_FLAGS, 256, 8, 96);
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

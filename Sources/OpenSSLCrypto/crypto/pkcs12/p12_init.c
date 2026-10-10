@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -71,7 +67,3 @@ const PKCS7_CTX *ossl_pkcs12_get0_pkcs7ctx(const PKCS12 *p12)
         return NULL;
     return &p12->authsafes->ctx;
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

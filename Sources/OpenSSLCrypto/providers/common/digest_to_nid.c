@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -63,7 +59,3 @@ int ossl_digest_get_approved_nid(const EVP_MD *md)
 
     return ossl_digest_md_to_nid(md, name_to_nid, OSSL_NELEM(name_to_nid));
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

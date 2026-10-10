@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -67,7 +63,3 @@ void openssl_add_all_digests_int(void)
     EVP_add_digest(EVP_shake128());
     EVP_add_digest(EVP_shake256());
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

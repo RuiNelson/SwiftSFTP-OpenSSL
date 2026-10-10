@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -1192,7 +1188,3 @@ static int s390x_ed448_digestverify(const ECX_KEY *edkey,
 }
 
 #endif /* S390X_EC_ASM */
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

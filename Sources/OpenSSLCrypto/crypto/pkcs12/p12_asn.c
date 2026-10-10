@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -96,7 +92,3 @@ ASN1_ITEM_TEMPLATE_END(PKCS12_SAFEBAGS)
 /* Authsafes: SEQUENCE OF PKCS7 */
 ASN1_ITEM_TEMPLATE(PKCS12_AUTHSAFES) = ASN1_EX_TEMPLATE_TYPE(ASN1_TFLG_SEQUENCE_OF, 0, PKCS12_AUTHSAFES, PKCS7)
 ASN1_ITEM_TEMPLATE_END(PKCS12_AUTHSAFES)
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

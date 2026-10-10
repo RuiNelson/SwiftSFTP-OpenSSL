@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -287,8 +283,4 @@ PKCS12 *d2i_PKCS12_fp(FILE *fp, PKCS12 **p12)
     }
     return ASN1_item_d2i_fp_ex(ASN1_ITEM_rptr(PKCS12), fp, p12, libctx, propq);
 }
-#endif
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
 #endif

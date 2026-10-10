@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -261,7 +257,3 @@ int SipHash_Final(SIPHASH *ctx, unsigned char *out, size_t outlen)
     U64TO8_LE(out + 8, b);
     return 1;
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

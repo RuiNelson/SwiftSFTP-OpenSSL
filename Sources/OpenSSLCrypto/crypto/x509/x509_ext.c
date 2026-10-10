@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -195,7 +191,3 @@ int X509_REVOKED_add1_ext_i2d(X509_REVOKED *x, int nid, void *value, int crit,
 {
     return X509V3_add1_i2d(&x->extensions, nid, value, crit, flags);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

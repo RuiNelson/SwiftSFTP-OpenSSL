@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -718,7 +714,3 @@ const EVP_PKEY_ASN1_METHOD ossl_ed448_asn1_meth = {
 
     ecx_priv_decode_ex
 };
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

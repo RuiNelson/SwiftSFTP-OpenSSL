@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -90,7 +86,3 @@ unsigned char *SHA512(const unsigned char *d, size_t n, unsigned char *md)
         md = m;
     return EVP_Q_digest(NULL, "SHA512", NULL, d, n, md, NULL) ? md : NULL;
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

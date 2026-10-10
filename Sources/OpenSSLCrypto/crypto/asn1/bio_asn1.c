@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -489,7 +485,3 @@ int BIO_asn1_get_suffix(BIO *b, asn1_ps_func **psuffix,
 {
     return asn1_bio_get_ex(b, BIO_C_GET_SUFFIX, psuffix, psuffix_free);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

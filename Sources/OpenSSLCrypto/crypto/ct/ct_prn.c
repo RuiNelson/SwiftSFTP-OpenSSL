@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -132,7 +128,3 @@ void SCT_LIST_print(const STACK_OF(SCT) *sct_list, BIO *out, int indent,
             BIO_printf(out, "%s", separator);
     }
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

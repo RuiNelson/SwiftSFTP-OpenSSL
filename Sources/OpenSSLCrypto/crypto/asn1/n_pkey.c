@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -64,7 +60,3 @@ ASN1_SEQUENCE(NETSCAPE_PKEY) = {
 DECLARE_ASN1_FUNCTIONS(NETSCAPE_PKEY)
 DECLARE_ASN1_ENCODE_FUNCTIONS_name(NETSCAPE_PKEY, NETSCAPE_PKEY)
 IMPLEMENT_ASN1_FUNCTIONS(NETSCAPE_PKEY)
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

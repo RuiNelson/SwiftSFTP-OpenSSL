@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -350,7 +346,3 @@ int ossl_pw_passphrase_callback_dec(char *pass, size_t pass_size,
 {
     return ossl_pw_get_passphrase(pass, pass_size, pass_len, params, 0, arg);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

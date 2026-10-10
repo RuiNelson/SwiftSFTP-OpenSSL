@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -214,7 +210,3 @@ void CRYPTO_cfb128_8_encrypt(const unsigned char *in, unsigned char *out,
     for (n = 0; n < length; ++n)
         cfbr_encrypt_block(&in[n], &out[n], 8, key, ivec, enc, block);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

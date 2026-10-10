@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -232,7 +228,3 @@ DH *PEM_read_DHparams(FILE *fp, DH **x, pem_password_cb *cb, void *u)
 
 #endif
 IMPLEMENT_PEM_provided_write(PUBKEY, EVP_PKEY, pkey, PEM_STRING_PUBLIC, PUBKEY)
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -518,7 +514,3 @@ void Camellia_DecryptBlock(int keyBitLength, const u8 ciphertext[],
     Camellia_DecryptBlock_Rounds(keyBitLength == 128 ? 3 : 4,
         ciphertext, keyTable, plaintext);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

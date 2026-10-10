@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -1730,7 +1726,3 @@ int OSSL_PARAM_set_octet_string_or_ptr(OSSL_PARAM *p, const void *val,
     err_bad_type;
     return 0;
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

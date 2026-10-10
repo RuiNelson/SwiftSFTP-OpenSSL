@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -317,7 +313,3 @@ const ASN1_OCTET_STRING *X509_get0_distinguishing_id(const X509 *x)
 {
     return x->distinguishing_id;
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

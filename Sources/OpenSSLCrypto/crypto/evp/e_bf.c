@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -23,8 +19,4 @@ IMPLEMENT_BLOCK_CIPHER(bf, ks, BF, EVP_BF_KEY, NID_bf, 8, 16, 8, 64,
     EVP_CIPH_VARIABLE_LENGTH)
 #else
 NON_EMPTY_TRANSLATION_UNIT
-#endif
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
 #endif

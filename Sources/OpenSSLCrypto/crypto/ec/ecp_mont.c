@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -305,7 +301,3 @@ int ossl_ec_GFp_mont_field_set_to_one(const EC_GROUP *group, BIGNUM *r,
         return 0;
     return 1;
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

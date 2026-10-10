@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -200,7 +196,3 @@ static const OSSL_PARAM *blake_settable_ctx_params(ossl_unused void *ctx,
 
 IMPLEMENT_BLAKE_functions(2s, 2S, 2s256)
 IMPLEMENT_BLAKE_functions(2b, 2B, 2b512)
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

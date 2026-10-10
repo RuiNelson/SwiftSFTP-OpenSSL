@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -414,7 +410,3 @@ int EVP_PKEY_export(const EVP_PKEY *pkey, int selection,
 #endif
     return evp_keymgmt_util_export(pkey, selection, export_cb, export_cbarg);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

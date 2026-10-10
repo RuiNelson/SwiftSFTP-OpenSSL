@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -530,7 +526,3 @@ static int ml_dsa_get_ctx_params(void *vctx, OSSL_PARAM *params)
 MAKE_SIGNATURE_FUNCTIONS(44);
 MAKE_SIGNATURE_FUNCTIONS(65);
 MAKE_SIGNATURE_FUNCTIONS(87);
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

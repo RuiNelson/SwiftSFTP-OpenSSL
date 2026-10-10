@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -300,7 +296,3 @@ IMPLEMENT_cipher(rc2, RC2, cbc, CBC, RC2_FLAGS, 64, 64, 64, block)
 IMPLEMENT_cipher(rc2, RC2, ofb128, OFB, RC2_FLAGS, 128, 8, 64, stream)
 /* ossl_rc2128cfb128_functions */
 IMPLEMENT_cipher(rc2, RC2, cfb128, CFB, RC2_FLAGS, 128, 8, 64, stream)
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

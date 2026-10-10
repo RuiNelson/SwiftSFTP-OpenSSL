@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -28,7 +24,3 @@ const int ossl_aes_xts_allow_insecure_decrypt = 0;
 #else
 const int ossl_aes_xts_allow_insecure_decrypt = 1;
 #endif /* FIPS_MODULE */
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

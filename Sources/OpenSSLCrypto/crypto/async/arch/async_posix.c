@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -142,8 +138,4 @@ void async_fibre_free(async_fibre *fibre)
     fibre->fibre.uc_stack.ss_sp = NULL;
 }
 
-#endif
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
 #endif

@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -72,7 +68,3 @@ int BN_is_prime_fasttest(const BIGNUM *a, int checks,
     BN_GENCB_set_old(&cb, callback, cb_arg);
     return ossl_bn_check_prime(a, checks, ctx_passed, do_trial_division, &cb);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -48,7 +44,3 @@ const PROV_CIPHER_HW *ossl_prov_cipher_hw_rc4(size_t keybits)
 {
     return &rc4_hw;
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

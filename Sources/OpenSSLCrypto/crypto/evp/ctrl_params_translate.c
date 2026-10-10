@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -2994,7 +2990,3 @@ int evp_pkey_get_params_to_ctrl(const EVP_PKEY *pkey, OSSL_PARAM *params)
 {
     return evp_pkey_setget_params_to_ctrl(pkey, OSSL_ACTION_GET, params);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

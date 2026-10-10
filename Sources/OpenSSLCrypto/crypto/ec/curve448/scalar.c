@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -230,7 +226,3 @@ void ossl_curve448_scalar_halve(curve448_scalar_t out, const curve448_scalar_t a
         out->limb[i] = out->limb[i] >> 1 | out->limb[i + 1] << (WBITS - 1);
     out->limb[i] = out->limb[i] >> 1 | (c448_word_t)(chain << (WBITS - 1));
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

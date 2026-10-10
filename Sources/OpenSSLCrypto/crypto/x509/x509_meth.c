@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -170,7 +166,3 @@ X509_LOOKUP_get_by_alias_fn X509_LOOKUP_meth_get_get_by_alias(
 {
     return method->get_by_alias;
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

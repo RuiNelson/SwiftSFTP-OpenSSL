@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -549,7 +545,3 @@ const OSSL_PARAM *EVP_KEM_settable_ctx_params(const EVP_KEM *kem)
     provctx = ossl_provider_ctx(EVP_KEM_get0_provider(kem));
     return kem->settable_ctx_params(NULL, provctx);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

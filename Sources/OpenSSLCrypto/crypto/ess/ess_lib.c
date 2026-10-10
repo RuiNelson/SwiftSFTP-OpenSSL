@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -375,7 +371,3 @@ int OSSL_ESS_check_signing_certs(const ESS_SIGNING_CERT *ss,
     return OSSL_ESS_check_signing_certs_ex(ss, ssv2, chain, NULL,
         NULL, require_signing_cert);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

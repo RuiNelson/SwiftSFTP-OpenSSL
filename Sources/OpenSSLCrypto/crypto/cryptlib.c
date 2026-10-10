@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -289,7 +285,3 @@ void OPENSSL_die(const char *message, const char *file, int line)
 #define OPENSSL_VPROC_FUNC OPENSSL_VPROC_STRING(OPENSSL_VPROC)
 void OPENSSL_VPROC_FUNC(void) { }
 #endif /* __TANDEM */
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

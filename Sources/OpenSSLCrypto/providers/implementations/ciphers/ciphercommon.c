@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -716,7 +712,3 @@ void ossl_cipher_generic_initkey(void *vctx, size_t kbits, size_t blkbits,
     if (provctx != NULL)
         ctx->libctx = PROV_LIBCTX_OF(provctx); /* used for rand */
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

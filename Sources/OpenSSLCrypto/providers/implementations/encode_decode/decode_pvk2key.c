@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -295,7 +291,3 @@ static void rsa_adjust(void *key, struct pvk2key_ctx_st *ctx)
 IMPLEMENT_MS(DSA, dsa);
 #endif
 IMPLEMENT_MS(RSA, rsa);
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

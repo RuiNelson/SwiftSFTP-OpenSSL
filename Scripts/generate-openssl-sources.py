@@ -123,17 +123,9 @@ def generate(directory):
         # Hide definitions inside the image that contains SwiftSFTP. This works
         # with both static and dynamic consumers, without unsafe SwiftPM flags.
         prefix = "/* Prepared by Scripts/generate-openssl-sources.py. */\n"
-        # Xcode enables LP64 narrowing diagnostics that OpenSSL's own build does
-        # not enable. Scope this suppression to each prepared translation unit;
-        # public headers and consumer code retain their normal warning settings.
-        prefix += ("#if defined(__clang__)\n"
-                   "#pragma clang diagnostic push\n"
-                   '#pragma clang diagnostic ignored "-Wshorten-64-to-32"\n'
-                   "#endif\n")
         prefix += "#pragma GCC visibility push(hidden)\n"
         prefix += "".join(f"#define {value.replace('=', ' ', 1)}\n" for value in defines)
-        suffix = "\n#if defined(__clang__)\n#pragma clang diagnostic pop\n#endif\n"
-        files[str(relative)] = prefix + adapt(path.read_text()) + suffix
+        files[str(relative)] = prefix + adapt(path.read_text())
         copy_included_implementations(path)
 
     # Copy private headers as well as generated headers/inc files. Generated

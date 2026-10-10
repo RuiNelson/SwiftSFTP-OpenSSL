@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -664,7 +660,3 @@ int ossl_i2c_uint64_int(unsigned char *p, uint64_t r, int neg)
     off = asn1_put_uint64(buf, r);
     return (int)i2c_ibuf(buf + off, sizeof(buf) - off, neg, &p);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

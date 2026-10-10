@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -37,7 +33,3 @@ const EVP_MD *EVP_md5_sha1(void)
 {
     return &md5_sha1_md;
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

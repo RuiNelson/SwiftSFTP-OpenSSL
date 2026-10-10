@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -339,7 +335,3 @@ IMPLEMENT_digest_functions_with_serialize(sha512_256, SHA512_CTX,
     SHA2_FLAGS, sha512_256_init,
     SHA512_Update_thunk, SHA512_Final,
     SHA512_Serialize, SHA512_Deserialize)
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

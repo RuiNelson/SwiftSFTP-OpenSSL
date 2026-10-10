@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -286,7 +282,3 @@ X509_ALGOR *PKCS5_pbkdf2_set(int iter, unsigned char *salt, int saltlen,
 {
     return PKCS5_pbkdf2_set_ex(iter, salt, saltlen, prf_nid, keylen, NULL);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -23,7 +19,3 @@
 IMPLEMENT_digest_functions(sm3, SM3_CTX,
     SM3_CBLOCK, SM3_DIGEST_LENGTH, 0,
     ossl_sm3_init, ossl_sm3_update, ossl_sm3_final)
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

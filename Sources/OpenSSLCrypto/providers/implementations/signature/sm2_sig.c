@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -600,7 +596,3 @@ const OSSL_DISPATCH ossl_sm2_signature_functions[] = {
         (void (*)(void))sm2sig_settable_ctx_md_params },
     OSSL_DISPATCH_END
 };
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

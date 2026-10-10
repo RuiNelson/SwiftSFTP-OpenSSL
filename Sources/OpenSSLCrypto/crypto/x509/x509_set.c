@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -312,7 +308,3 @@ int ossl_x509_init_sig_info(const X509 *x, X509_SIG_INFO *info)
     return x509_sig_info_init(info, &x->sig_alg, &x->signature,
         X509_PUBKEY_get0(x->cert_info.key));
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

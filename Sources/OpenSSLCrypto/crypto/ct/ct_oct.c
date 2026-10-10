@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -418,7 +414,3 @@ int i2d_SCT_LIST(const STACK_OF(SCT) *a, unsigned char **out)
     ASN1_OCTET_STRING_free(oct);
     return len;
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -873,7 +869,3 @@ static void ml_kem_free_key(void *keydata)
 DECLARE_VARIANT(512);
 DECLARE_VARIANT(768);
 DECLARE_VARIANT(1024);
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

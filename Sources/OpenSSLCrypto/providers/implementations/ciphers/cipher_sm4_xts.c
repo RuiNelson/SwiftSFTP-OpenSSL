@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -279,7 +275,3 @@ static int sm4_xts_set_ctx_params(void *vxctx, const OSSL_PARAM params[])
     }
 /* ossl_sm4128xts_functions */
 IMPLEMENT_cipher(xts, XTS, 128, SM4_XTS_FLAGS);
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

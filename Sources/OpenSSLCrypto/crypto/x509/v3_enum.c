@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -60,7 +56,3 @@ char *i2s_ASN1_ENUMERATED_TABLE(X509V3_EXT_METHOD *method,
     }
     return i2s_ASN1_ENUMERATED(method, e);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

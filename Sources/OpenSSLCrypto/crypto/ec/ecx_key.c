@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -173,7 +169,3 @@ int ossl_ecx_compute_key(ECX_KEY *peer, ECX_KEY *priv, size_t keylen,
     *secretlen = keylen;
     return 1;
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

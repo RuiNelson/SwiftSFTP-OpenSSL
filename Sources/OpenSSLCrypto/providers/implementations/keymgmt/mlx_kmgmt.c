@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -837,8 +833,4 @@ DECLARE_DISPATCH(x448, 3);
 #endif
 #if !defined(FIPS_MODULE) && !defined(OPENSSL_NO_SM2)
 DECLARE_DISPATCH(curve_sm2, 4);
-#endif
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
 #endif

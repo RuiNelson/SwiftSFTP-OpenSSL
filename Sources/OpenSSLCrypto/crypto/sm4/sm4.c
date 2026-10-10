@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -383,7 +379,3 @@ void ossl_sm4_decrypt(const uint8_t *in, uint8_t *out, const SM4_KEY *ks)
     store_u32_be(B1, out + 8);
     store_u32_be(B0, out + 12);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

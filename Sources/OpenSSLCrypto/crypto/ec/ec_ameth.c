@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -715,7 +711,3 @@ int ECParameters_print(BIO *bp, const EC_KEY *x)
 {
     return do_EC_KEY_print(bp, x, 4, EC_KEY_PRINT_PARAM);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -204,7 +200,3 @@ mask_t gf_isr(gf a, const gf x)
     gf_copy(a, L1);
     return gf_eq(L0, ONE);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

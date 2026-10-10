@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -500,7 +496,3 @@ int CMS_CMSORIforKEMOtherInfo_encode(unsigned char **pder, X509_ALGOR *wrap, ASN
     return ASN1_item_i2d((ASN1_VALUE *)&kem_otherinfo, pder,
         ASN1_ITEM_rptr(CMS_CMSORIforKEMOtherInfo));
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

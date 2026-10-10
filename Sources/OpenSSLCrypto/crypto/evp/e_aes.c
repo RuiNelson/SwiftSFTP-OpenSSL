@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -155,7 +151,3 @@ BLOCK_CIPHER_custom(NID_aes, 192, 16, 12, ocb, OCB,
 BLOCK_CIPHER_custom(NID_aes, 256, 16, 12, ocb, OCB,
     EVP_CIPH_FLAG_AEAD_CIPHER | CUSTOM_FLAGS)
 #endif /* OPENSSL_NO_OCB */
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

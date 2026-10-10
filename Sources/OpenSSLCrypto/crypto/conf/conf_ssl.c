@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -196,7 +192,3 @@ void ossl_config_add_ssl_module(void)
 {
     CONF_module_add("ssl_conf", ssl_module_init, ssl_module_free);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

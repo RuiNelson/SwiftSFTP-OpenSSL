@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -776,8 +772,4 @@ int SRP_create_verifier_BN(const char *user, const char *pass, BIGNUM **salt,
     return SRP_create_verifier_BN_ex(user, pass, salt, verifier, N, g, NULL,
         NULL);
 }
-#endif
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
 #endif

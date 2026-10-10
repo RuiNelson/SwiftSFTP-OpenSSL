@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -296,7 +292,3 @@ void SCT_CTX_set_time(SCT_CTX *sctx, uint64_t time_in_ms)
 {
     sctx->epoch_time_in_ms = time_in_ms;
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

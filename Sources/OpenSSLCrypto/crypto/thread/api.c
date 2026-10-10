@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -77,8 +73,4 @@ int OSSL_set_max_threads(OSSL_LIB_CTX *ctx, uint64_t max_threads)
     return 1;
 }
 
-#endif
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
 #endif

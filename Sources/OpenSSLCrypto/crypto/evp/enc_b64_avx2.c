@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 #include <SwiftSFTP_OpenSSL/evp.h>
@@ -686,8 +682,4 @@ size_t encode_base64_avx2(EVP_ENCODE_CTX *ctx, unsigned char *dst,
 OPENSSL_UNTARGET_AVX2
 #endif /* defined(HAVE_AVX2_INTRINSICS) */
 #endif /* !defined(_M_ARM64EC) */
-#endif
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
 #endif

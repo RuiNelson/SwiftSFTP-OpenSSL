@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -28,7 +24,3 @@ int DSA_do_verify(const unsigned char *dgst, int dgst_len, DSA_SIG *sig,
 {
     return dsa->meth->dsa_do_verify(dgst, dgst_len, sig, dsa);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

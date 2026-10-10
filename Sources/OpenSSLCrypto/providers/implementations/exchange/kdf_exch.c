@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -262,7 +258,3 @@ KDF_GETTABLE_CTX_PARAMS(scrypt, "SCRYPT")
 KDF_KEYEXCH_FUNCTIONS(tls1_prf)
 KDF_KEYEXCH_FUNCTIONS(hkdf)
 KDF_KEYEXCH_FUNCTIONS(scrypt)
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

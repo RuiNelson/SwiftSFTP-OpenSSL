@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -453,7 +449,3 @@ const ASN1_TYPE *X509_ATTRIBUTE_get0_type(const X509_ATTRIBUTE *attr, int idx)
     }
     return sk_ASN1_TYPE_value(attr->set, idx);
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif

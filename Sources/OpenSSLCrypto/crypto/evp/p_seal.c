@@ -1,8 +1,4 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wshorten-64-to-32"
-#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -94,7 +90,3 @@ int EVP_SealFinal(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl)
         i = EVP_EncryptInit_ex(ctx, NULL, NULL, NULL, NULL);
     return i;
 }
-
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#endif
