@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -111,3 +115,7 @@ static ASN1_OCTET_STRING *s2i_skey_id(X509V3_EXT_METHOD *method,
 
     return ossl_x509_pubkey_hash(ctx->subject_cert != NULL ? ctx->subject_cert->cert_info.key : ctx->subject_req->req_info.pubkey);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

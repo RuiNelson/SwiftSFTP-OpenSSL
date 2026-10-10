@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -466,3 +470,7 @@ void ossl_ccm_initctx(PROV_CCM_CTX *ctx, size_t keybits, const PROV_CCM_HW *hw)
     ctx->tls_aad_len = UNINITIALISED_SIZET;
     ctx->hw = hw;
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

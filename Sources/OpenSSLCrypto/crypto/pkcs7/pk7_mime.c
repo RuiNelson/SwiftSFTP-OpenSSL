@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -76,3 +80,7 @@ PKCS7 *SMIME_read_PKCS7(BIO *bio, BIO **bcont)
 {
     return SMIME_read_PKCS7_ex(bio, bcont, NULL);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

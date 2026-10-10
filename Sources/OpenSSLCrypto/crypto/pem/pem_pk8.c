@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -274,3 +278,7 @@ IMPLEMENT_PEM_rw(PKCS8, X509_SIG, PEM_STRING_PKCS8, X509_SIG)
 
 IMPLEMENT_PEM_rw(PKCS8_PRIV_KEY_INFO, PKCS8_PRIV_KEY_INFO, PEM_STRING_PKCS8INF,
     PKCS8_PRIV_KEY_INFO)
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

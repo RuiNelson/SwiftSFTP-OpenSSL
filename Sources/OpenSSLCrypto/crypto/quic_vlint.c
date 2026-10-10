@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 #include "internal/quic_vlint.h"
@@ -81,4 +85,8 @@ int ossl_quic_vlint_decode(const unsigned char *buf, size_t buf_len, uint64_t *v
     return (int)dec_len;
 }
 
+#endif
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
 #endif

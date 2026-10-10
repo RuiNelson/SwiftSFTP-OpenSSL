@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -157,3 +161,7 @@ void ChaCha20_ctr32(unsigned char *out, const unsigned char *inp, size_t len,
         input[12]++;
     }
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

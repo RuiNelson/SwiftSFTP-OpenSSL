@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -38,3 +42,7 @@
 BLOCK_CIPHER_generic_pack(NID_camellia, 128, 0)
 BLOCK_CIPHER_generic_pack(NID_camellia, 192, 0)
 BLOCK_CIPHER_generic_pack(NID_camellia, 256, 0)
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

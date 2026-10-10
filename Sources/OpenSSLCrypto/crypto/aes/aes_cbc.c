@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -32,3 +36,7 @@ void AES_cbc_encrypt(const unsigned char *in, unsigned char *out,
         CRYPTO_cbc128_decrypt(in, out, len, key, ivec,
             (block128_f)AES_decrypt);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

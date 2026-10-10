@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -188,3 +192,7 @@ int i2d_re_X509_CRL_tbs(X509_CRL *crl, unsigned char **pp)
     crl->crl.enc.modified = 1;
     return i2d_X509_CRL_INFO(&crl->crl, pp);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

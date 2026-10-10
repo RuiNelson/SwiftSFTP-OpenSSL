@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -60,3 +64,7 @@ IMPLEMENT_var_keylen_cipher(cast5, CAST, cbc, CBC, CAST5_FLAGS, 128, 64, 64, blo
 IMPLEMENT_var_keylen_cipher(cast5, CAST, ofb64, OFB, CAST5_FLAGS, 128, 8, 64, stream)
 /* ossl_cast5128cfb64_functions */
 IMPLEMENT_var_keylen_cipher(cast5, CAST, cfb64, CFB, CAST5_FLAGS, 128, 8, 64, stream)
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

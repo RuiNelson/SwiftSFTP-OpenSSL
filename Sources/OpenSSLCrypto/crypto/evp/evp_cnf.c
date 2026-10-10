@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -76,3 +80,7 @@ void EVP_add_alg_module(void)
     OSSL_TRACE(CONF, "Adding config module 'alg_section'\n");
     CONF_module_add("alg_section", alg_module_init, 0);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

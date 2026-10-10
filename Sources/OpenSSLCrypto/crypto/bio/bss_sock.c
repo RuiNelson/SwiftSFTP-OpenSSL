@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -339,3 +343,7 @@ int BIO_sock_non_fatal_error(int err)
 }
 
 #endif /* #ifndef OPENSSL_NO_SOCK */
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

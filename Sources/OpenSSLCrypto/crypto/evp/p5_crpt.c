@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -125,3 +129,7 @@ int PKCS5_PBE_keyivgen(EVP_CIPHER_CTX *cctx, const char *pass, int passlen,
     return PKCS5_PBE_keyivgen_ex(cctx, pass, passlen, param, cipher, md, en_de,
         NULL, NULL);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

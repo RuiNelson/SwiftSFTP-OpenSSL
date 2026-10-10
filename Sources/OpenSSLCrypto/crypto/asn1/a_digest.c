@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -86,3 +90,7 @@ int ASN1_item_digest(const ASN1_ITEM *it, const EVP_MD *md, void *asn,
 {
     return ossl_asn1_item_digest_ex(it, md, asn, data, len, NULL, NULL);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

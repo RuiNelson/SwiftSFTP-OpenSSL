@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -91,3 +95,7 @@ void RC4(RC4_KEY *key, size_t len, const unsigned char *indata,
     key->x = x;
     key->y = y;
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

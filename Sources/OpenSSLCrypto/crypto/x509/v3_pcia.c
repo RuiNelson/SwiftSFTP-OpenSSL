@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -63,3 +67,7 @@ ASN1_SEQUENCE(PROXY_CERT_INFO_EXTENSION) = {
 } ASN1_SEQUENCE_END(PROXY_CERT_INFO_EXTENSION)
 
 IMPLEMENT_ASN1_FUNCTIONS(PROXY_CERT_INFO_EXTENSION)
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

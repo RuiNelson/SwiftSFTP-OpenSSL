@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -327,3 +331,7 @@ const OSSL_DISPATCH ossl_kdf_pkcs12_functions[] = {
     { OSSL_FUNC_KDF_GET_CTX_PARAMS, (void (*)(void))kdf_pkcs12_get_ctx_params },
     OSSL_DISPATCH_END
 };
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

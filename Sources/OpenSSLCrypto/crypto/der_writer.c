@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -203,3 +207,7 @@ int ossl_DER_w_end_sequence(WPACKET *pkt, int tag)
                 : WPACKET_put_bytes_u8(pkt, DER_F_CONSTRUCTED | DER_P_SEQUENCE))
         && int_end_context(pkt, tag);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

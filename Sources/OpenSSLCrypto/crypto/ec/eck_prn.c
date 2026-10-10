@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -262,3 +266,7 @@ static int print_bin(BIO *fp, const char *name, const unsigned char *buf,
     return 1;
 }
 #endif /* OPENSSL_NO_DEPRECATED_3_0 */
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

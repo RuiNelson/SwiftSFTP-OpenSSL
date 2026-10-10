@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -25,3 +29,7 @@
 IMPLEMENT_digest_functions(md5, MD5_CTX,
     MD5_CBLOCK, MD5_DIGEST_LENGTH, 0,
     MD5_Init, MD5_Update, MD5_Final)
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -133,4 +137,8 @@ void OPENSSL_LH_node_usage_stats_bio(const OPENSSL_LHASH *lh, BIO *out)
         (int)((total % lh->num_nodes) * 100 / lh->num_nodes),
         (int)(total / n_used), (int)((total % n_used) * 100 / n_used));
 }
+#endif
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
 #endif

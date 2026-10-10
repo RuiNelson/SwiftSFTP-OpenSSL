@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -1789,4 +1793,8 @@ MAKE_ENCODER(ml_dsa_87, ml_dsa, SubjectPublicKeyInfo, pem);
 #ifndef OPENSSL_NO_LMS
 MAKE_ENCODER(lms, lms, SubjectPublicKeyInfo, der);
 MAKE_ENCODER(lms, lms, SubjectPublicKeyInfo, pem);
+#endif
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
 #endif

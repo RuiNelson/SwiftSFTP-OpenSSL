@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -172,4 +176,8 @@ void md5_block_data_order(MD5_CTX *c, const void *data_, size_t num)
         D = c->D += D;
     }
 }
+#endif
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
 #endif

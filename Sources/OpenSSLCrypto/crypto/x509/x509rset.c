@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -45,3 +49,7 @@ int X509_REQ_set_pubkey(X509_REQ *x, EVP_PKEY *pkey)
     x->req_info.enc.modified = 1;
     return X509_PUBKEY_set(&x->req_info.pubkey, pkey);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

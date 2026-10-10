@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -276,3 +280,7 @@ BIO *ossl_cms_EncryptedData_init_bio(const CMS_ContentInfo *cms)
     return ossl_cms_EncryptedContent_init_bio(enc->encryptedContentInfo,
         ossl_cms_get0_cmsctx(cms), 0);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

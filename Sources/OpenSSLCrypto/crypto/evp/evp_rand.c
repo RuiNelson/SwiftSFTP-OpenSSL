@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -755,3 +759,7 @@ void evp_rand_clear_seed(EVP_RAND_CTX *ctx,
     evp_rand_clear_seed_locked(ctx, buffer, b_len);
     evp_rand_unlock(ctx);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

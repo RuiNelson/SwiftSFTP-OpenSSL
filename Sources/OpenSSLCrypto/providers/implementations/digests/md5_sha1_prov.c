@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -64,3 +68,7 @@ IMPLEMENT_digest_functions_with_settable_ctx(
     md5_sha1, MD5_SHA1_CTX, MD5_SHA1_CBLOCK, MD5_SHA1_DIGEST_LENGTH, 0,
     ossl_md5_sha1_init, ossl_md5_sha1_update, ossl_md5_sha1_final,
     md5_sha1_settable_ctx_params, md5_sha1_set_ctx_params)
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -1592,3 +1596,7 @@ static const niels_t curve448_wnaf_base_table[32] = {
     } }
 };
 const niels_t *ossl_curve448_wnaf_base = curve448_wnaf_base_table;
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

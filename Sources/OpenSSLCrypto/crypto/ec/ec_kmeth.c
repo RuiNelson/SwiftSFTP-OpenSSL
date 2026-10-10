@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -314,3 +318,7 @@ void EC_KEY_METHOD_get_verify(const EC_KEY_METHOD *meth,
     if (pverify_sig != NULL)
         *pverify_sig = meth->verify_sig;
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

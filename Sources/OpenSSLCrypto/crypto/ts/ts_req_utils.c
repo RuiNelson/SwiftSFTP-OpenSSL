@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -186,3 +190,7 @@ void *TS_REQ_get_ext_d2i(TS_REQ *a, int nid, int *crit, int *idx)
 {
     return X509V3_get_d2i(a->extensions, nid, crit, idx);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

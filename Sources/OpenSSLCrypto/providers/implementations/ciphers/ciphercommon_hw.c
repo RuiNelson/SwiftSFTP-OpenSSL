@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -194,3 +198,7 @@ int ossl_cipher_hw_chunked_ofb128(PROV_CIPHER_CTX *ctx, unsigned char *out,
         ossl_cipher_hw_generic_ofb128(ctx, out, in, inl);
     return 1;
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

@@ -36,6 +36,12 @@ Public headers use the `SwiftSFTP_OpenSSL/` namespace. Public C functions keep t
 names and receive private `SwiftSFTP_OpenSSL_` linker names; internal symbols are hidden.
 This prevents interference from another SDK's OpenSSL/BoringSSL headers or symbols.
 
+The generator suppresses Clang's `-Wshorten-64-to-32` diagnostics inside each prepared
+C translation unit, so Xcode does not report OpenSSL's upstream integer conversions
+hundreds of times. Other warnings remain enabled, and the suppression does not apply
+to public headers imported by consumers or to application code. No unsafe SwiftPM
+compiler flags are needed.
+
 ## Updating OpenSSL
 
 The daily GitHub Actions workflow checks the official upstream stable tags at 08:23 UTC.

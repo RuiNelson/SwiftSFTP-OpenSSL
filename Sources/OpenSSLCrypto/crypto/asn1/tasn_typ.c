@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -87,3 +91,7 @@ ASN1_ITEM_TEMPLATE_END(ASN1_SET_ANY)
 
 IMPLEMENT_ASN1_ENCODE_FUNCTIONS_fname(ASN1_SEQUENCE_ANY, ASN1_SEQUENCE_ANY, ASN1_SEQUENCE_ANY)
 IMPLEMENT_ASN1_ENCODE_FUNCTIONS_fname(ASN1_SEQUENCE_ANY, ASN1_SET_ANY, ASN1_SET_ANY)
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

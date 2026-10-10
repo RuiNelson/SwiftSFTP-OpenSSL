@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -397,3 +401,7 @@ MAKE_SIGNATURE_FUNCTIONS("SLH-DSA-SHAKE-192s", shake_192s);
 MAKE_SIGNATURE_FUNCTIONS("SLH-DSA-SHAKE-192f", shake_192f);
 MAKE_SIGNATURE_FUNCTIONS("SLH-DSA-SHAKE-256s", shake_256s);
 MAKE_SIGNATURE_FUNCTIONS("SLH-DSA-SHAKE-256f", shake_256f);
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -194,3 +198,7 @@ void ossl_ml_dsa_poly_ntt_inverse(POLY *p)
     for (i = 0; i < ML_DSA_NUM_POLY_COEFFICIENTS; i++)
         p->coeff[i] = reduce_montgomery((uint64_t)p->coeff[i] * (uint64_t)inverse_degree_montgomery);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -564,3 +568,7 @@ void ossl_rbt_init_rbe(const struct ossl_rbt_type *t, void *node)
     OSSL_RBE_LEFT(rbe) = NULL;
     OSSL_RBE_RIGHT(rbe) = NULL;
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

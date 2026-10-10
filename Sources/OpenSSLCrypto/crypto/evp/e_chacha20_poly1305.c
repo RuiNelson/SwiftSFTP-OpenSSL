@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -49,4 +53,8 @@ const EVP_CIPHER *EVP_chacha20_poly1305(void)
 #endif
 #else
 NON_EMPTY_TRANSLATION_UNIT
+#endif
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
 #endif

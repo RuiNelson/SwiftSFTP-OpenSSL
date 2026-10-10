@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -417,3 +421,7 @@ int BN_generate_dsa_nonce(BIGNUM *out, const BIGNUM *range,
     bn_correct_top(out);
     return ret;
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

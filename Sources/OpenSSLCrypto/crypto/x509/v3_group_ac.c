@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -56,3 +60,7 @@ const X509V3_EXT_METHOD ossl_v3_group_ac = {
     (X509V3_EXT_R2I)r2i_GROUP_AC,
     NULL
 };
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

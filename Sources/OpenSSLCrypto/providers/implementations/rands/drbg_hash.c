@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -670,3 +674,7 @@ const OSSL_DISPATCH ossl_drbg_hash_functions[] = {
     { OSSL_FUNC_RAND_CLEAR_SEED, (void (*)(void))ossl_drbg_clear_seed },
     OSSL_DISPATCH_END
 };
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

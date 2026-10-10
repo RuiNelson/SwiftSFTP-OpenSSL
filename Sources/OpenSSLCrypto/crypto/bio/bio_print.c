@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -279,3 +283,7 @@ int BIO_vsnprintf(char *buf, size_t n, const char *format, va_list args)
 #endif
     return ret;
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

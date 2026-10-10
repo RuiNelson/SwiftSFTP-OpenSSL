@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -120,3 +124,7 @@ int X509_STORE_load_locations(X509_STORE *ctx, const char *file,
 {
     return X509_STORE_load_locations_ex(ctx, file, path, NULL, NULL);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

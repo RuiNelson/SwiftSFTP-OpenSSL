@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -125,3 +129,7 @@ CMS_ContentInfo *SMIME_read_CMS(BIO *bio, BIO **bcont)
 {
     return SMIME_read_CMS_ex(bio, 0, bcont, NULL);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

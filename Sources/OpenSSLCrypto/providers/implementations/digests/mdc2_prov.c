@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -59,3 +63,7 @@ IMPLEMENT_digest_functions_with_settable_ctx(
     mdc2, MDC2_CTX, MDC2_BLOCK, MDC2_DIGEST_LENGTH, 0,
     MDC2_Init, MDC2_Update, MDC2_Final,
     mdc2_settable_ctx_params, mdc2_set_ctx_params)
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

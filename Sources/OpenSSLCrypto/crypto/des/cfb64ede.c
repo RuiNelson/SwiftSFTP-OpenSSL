@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -196,3 +200,7 @@ void DES_ede3_cfb_encrypt(const unsigned char *in, unsigned char *out,
     l2c(v1, iv);
     v0 = v1 = d0 = d1 = ti[0] = ti[1] = 0;
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

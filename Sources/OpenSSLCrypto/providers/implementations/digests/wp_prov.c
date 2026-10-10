@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -25,3 +29,7 @@
 IMPLEMENT_digest_functions(wp, WHIRLPOOL_CTX,
     WHIRLPOOL_BBLOCK / 8, WHIRLPOOL_DIGEST_LENGTH, 0,
     WHIRLPOOL_Init, WHIRLPOOL_Update, WHIRLPOOL_Final)
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -815,4 +819,8 @@ static long bio_brotli_callback_ctrl(BIO *b, int cmd, BIO_info_cb *fp)
     return BIO_callback_ctrl(next, cmd, fp);
 }
 
+#endif
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
 #endif

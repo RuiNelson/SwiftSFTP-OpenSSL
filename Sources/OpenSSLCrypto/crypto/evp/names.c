@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -283,3 +287,7 @@ void EVP_MD_do_all_sorted(void (*fn)(const EVP_MD *md,
     dc.arg = arg;
     OBJ_NAME_do_all_sorted(OBJ_NAME_TYPE_MD_METH, do_all_md_fn, &dc);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

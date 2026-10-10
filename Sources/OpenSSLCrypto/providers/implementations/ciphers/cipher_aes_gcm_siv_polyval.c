@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -96,3 +100,7 @@ void ossl_polyval_ghash_hash(const u128 Htable[16], uint8_t *tag, const uint8_t 
     }
     byte_reverse16(tag, (uint8_t *)out);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

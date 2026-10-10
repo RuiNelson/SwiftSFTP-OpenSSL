@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -838,3 +842,7 @@ const PROV_CIPHER_HW_AES_HMAC_SHA *ossl_prov_cipher_hw_aes_cbc_hmac_sha256(void)
 }
 
 #endif /* !defined(AES_CBC_HMAC_SHA_CAPABLE) || !defined(AESNI_CAPABLE) */
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

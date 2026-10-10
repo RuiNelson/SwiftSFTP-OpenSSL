@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -563,3 +567,7 @@ const SLH_HASH_FUNC *ossl_slh_get_hash_fn(int is_shake, int security_category)
     };
     return &methods[is_shake ? 0 : (security_category == 1 ? 1 : 2)];
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

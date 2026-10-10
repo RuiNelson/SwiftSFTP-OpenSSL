@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -36,3 +40,7 @@ IMPLEMENT_tdes_cipher(ede2, EDE2, cbc, CBC, TDES_FLAGS, 64 * 2, 64, 64, block);
 IMPLEMENT_tdes_cipher(ede2, EDE2, ofb, OFB, TDES_FLAGS, 64 * 2, 8, 64, stream);
 /* ossl_tdes_ede2_cfb_functions */
 IMPLEMENT_tdes_cipher(ede2, EDE2, cfb, CFB, TDES_FLAGS, 64 * 2, 8, 64, stream);
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

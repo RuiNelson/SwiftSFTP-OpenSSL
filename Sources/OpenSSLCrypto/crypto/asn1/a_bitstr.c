@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -301,3 +305,7 @@ int ASN1_BIT_STRING_set1(ASN1_BIT_STRING *abs, const uint8_t *data, size_t lengt
 
     return asn1_bit_string_set_unused_bits(abs, unused_bits);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

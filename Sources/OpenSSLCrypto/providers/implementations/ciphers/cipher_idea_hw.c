@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -64,3 +68,7 @@ PROV_CIPHER_HW_idea_mode(cbc, CBC)
 #define IDEA2_ecb_encrypt(in, out, ks, enc) IDEA_ecb_encrypt(in, out, ks)
 
             PROV_CIPHER_HW_idea_mode_ex(ecb, ECB, IDEA2_ecb)
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

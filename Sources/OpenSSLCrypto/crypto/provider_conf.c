@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -433,3 +437,7 @@ void ossl_provider_add_conf_module(void)
     OSSL_TRACE(CONF, "Adding config module 'providers'\n");
     CONF_module_add("providers", provider_conf_init, NULL);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

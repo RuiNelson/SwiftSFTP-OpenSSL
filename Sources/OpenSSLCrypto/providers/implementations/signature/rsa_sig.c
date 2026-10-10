@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -2115,4 +2119,8 @@ IMPL_RSA_SIGALG(sha3_384, "SHA3-384");
 IMPL_RSA_SIGALG(sha3_512, "SHA3-512");
 #if !defined(OPENSSL_NO_SM3) && !defined(FIPS_MODULE)
 IMPL_RSA_SIGALG(sm3, "SM3");
+#endif
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
 #endif

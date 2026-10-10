@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -179,3 +183,7 @@ int CTLOG_new_from_base64(CTLOG **ct_log, const char *pkey_base64,
 {
     return CTLOG_new_from_base64_ex(ct_log, pkey_base64, name, NULL, NULL);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

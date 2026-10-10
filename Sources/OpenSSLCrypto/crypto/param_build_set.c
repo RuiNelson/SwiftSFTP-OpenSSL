@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -130,3 +134,7 @@ int ossl_param_build_set_multi_key_bn(OSSL_PARAM_BLD *bld, OSSL_PARAM *params,
     }
     return 1;
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

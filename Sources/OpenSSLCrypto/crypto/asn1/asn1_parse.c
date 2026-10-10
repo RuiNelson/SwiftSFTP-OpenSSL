@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -384,3 +388,7 @@ const char *ASN1_tag2str(int tag)
         return "(unknown)";
     return tag2str[tag];
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

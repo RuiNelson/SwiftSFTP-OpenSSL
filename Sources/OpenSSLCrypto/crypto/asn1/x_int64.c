@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -281,3 +285,7 @@ ASN1_ITEM_start(INT32)
                                                      ASN1_ITEM_start(ZUINT64) ASN1_ITYPE_PRIMITIVE,
     V_ASN1_INTEGER, NULL, 0, &uint64_pf,
     INTxx_FLAG_ZERO_DEFAULT, "ZUINT64" ASN1_ITEM_end(ZUINT64)
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

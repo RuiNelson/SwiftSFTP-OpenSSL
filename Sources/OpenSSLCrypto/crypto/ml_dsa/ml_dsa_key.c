@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -568,3 +572,7 @@ const char *ossl_ml_dsa_key_get_name(const ML_DSA_KEY *key)
 {
     return key->params->alg;
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

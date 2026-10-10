@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -120,3 +124,7 @@ static int rc4_dinit(void *ctx, const unsigned char *key, size_t keylen,
 IMPLEMENT_cipher(rc4, RC4, RC4_FLAGS, 40, 8, 0, stream)
 /* ossl_rc4128_functions */
 IMPLEMENT_cipher(rc4, RC4, RC4_FLAGS, 128, 8, 0, stream)
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

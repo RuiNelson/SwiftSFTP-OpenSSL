@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -158,3 +162,7 @@ void ossl_threads_ctx_free(void *vdata)
     ossl_crypto_condvar_free(&t->cond_finished);
     OPENSSL_free(t);
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

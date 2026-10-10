@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -423,3 +427,7 @@ int ossl_ed448_public_from_private(OSSL_LIB_CTX *ctx, uint8_t out_public_key[57]
                propq)
         == C448_SUCCESS;
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

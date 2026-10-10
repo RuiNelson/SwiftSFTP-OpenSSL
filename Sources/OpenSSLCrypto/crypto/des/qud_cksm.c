@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -82,3 +86,7 @@ DES_LONG DES_quad_cksum(const unsigned char *input, DES_cblock output[],
     }
     return z0;
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 
@@ -312,3 +316,7 @@ static int aes_xts_set_ctx_params(void *vctx, const OSSL_PARAM params[])
 
 IMPLEMENT_cipher(xts, XTS, 256, AES_XTS_FLAGS);
 IMPLEMENT_cipher(xts, XTS, 128, AES_XTS_FLAGS);
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

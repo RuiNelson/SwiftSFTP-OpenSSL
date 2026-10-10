@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -247,3 +251,7 @@ const char *X509_verify_cert_error_string(long n)
         return "unknown certificate verification error";
     }
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif

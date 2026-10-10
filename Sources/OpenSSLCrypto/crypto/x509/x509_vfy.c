@@ -1,4 +1,8 @@
 /* Prepared by Scripts/generate-openssl-sources.py. */
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+#endif
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
@@ -4213,3 +4217,7 @@ static int check_sig_level(X509_STORE_CTX *ctx, X509 *cert)
 
     return secbits >= minbits_table[level - 1];
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif
