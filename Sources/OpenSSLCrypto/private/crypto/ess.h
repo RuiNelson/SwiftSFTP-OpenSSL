@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2021 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2019-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -10,6 +10,10 @@
 #ifndef OSSL_CRYPTO_ESS_H
 #define OSSL_CRYPTO_ESS_H
 #pragma once
+
+#include <SwiftSFTP_OpenSSL/asn1.h>
+#include <SwiftSFTP_OpenSSL/ess.h>
+#include <SwiftSFTP_OpenSSL/safestack.h>
 
 /*-
  * IssuerSerial ::= SEQUENCE {

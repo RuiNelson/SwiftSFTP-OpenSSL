@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2001-2022 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2001-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -78,13 +78,8 @@
 
 #ifdef WIN_CONSOLE_BUG
 #pragma GCC visibility push(default)
-#include <windows.h>
-#pragma GCC visibility pop
-#ifndef OPENSSL_SYS_WINCE
-#pragma GCC visibility push(default)
 #include <wincon.h>
 #pragma GCC visibility pop
-#endif
 #endif
 
 /*
@@ -205,7 +200,7 @@ static long tty_orig[3], tty_new[3]; /* XXX Is there any guarantee that this
                                       * structures? */
 static long status;
 static unsigned short channel = 0;
-#elif defined(_WIN32) && !defined(_WIN32_WCE)
+#elif defined(_WIN32)
 static DWORD tty_orig, tty_new;
 #else
 #if !defined(OPENSSL_SYS_MSDOS) || defined(__DJGPP__)
@@ -216,12 +211,10 @@ static FILE *tty_in, *tty_out;
 static int is_a_tty;
 
 /* Declare static functions */
-#if !defined(OPENSSL_SYS_WINCE)
 static int read_till_nl(FILE *);
 static void recsig(int);
 static void pushsig(void);
 static void popsig(void);
-#endif
 #if defined(OPENSSL_SYS_MSDOS) && !defined(_WIN32)
 static int noecho_fgets(char *buf, int size, FILE *tty);
 #endif
@@ -295,7 +288,6 @@ static int read_string(UI *ui, UI_STRING *uis)
     return 1;
 }
 
-#if !defined(OPENSSL_SYS_WINCE)
 /* Internal functions to read a string without echoing */
 static int read_till_nl(FILE *in)
 {
@@ -310,7 +302,6 @@ static int read_till_nl(FILE *in)
 }
 
 static volatile sig_atomic_t intr_signal;
-#endif
 
 static int read_string_inner(UI *ui, UI_STRING *uis, int echo, int strip_nl)
 {
@@ -318,7 +309,6 @@ static int read_string_inner(UI *ui, UI_STRING *uis, int echo, int strip_nl)
     int ok;
     char result[BUFSIZ];
     int maxsize = BUFSIZ - 1;
-#if !defined(OPENSSL_SYS_WINCE)
     char *p = NULL;
     int echo_eol = !echo;
 
@@ -398,9 +388,6 @@ error:
 
     if (ps >= 1)
         popsig();
-#else
-    ok = 1;
-#endif
 
     OPENSSL_cleanse(result, BUFSIZ);
     return ok;
@@ -416,7 +403,7 @@ static int open_console(UI *ui)
 #if defined(OPENSSL_SYS_VXWORKS)
     tty_in = stdin;
     tty_out = stderr;
-#elif defined(_WIN32) && !defined(_WIN32_WCE)
+#elif defined(_WIN32)
     if ((tty_out = fopen("conout$", "w")) == NULL)
         tty_out = stderr;
 
@@ -545,7 +532,7 @@ static int noecho_console(UI *ui)
         }
     }
 #endif
-#if defined(_WIN32) && !defined(_WIN32_WCE)
+#if defined(_WIN32)
     if (is_a_tty) {
         tty_new = tty_orig;
         tty_new &= ~ENABLE_ECHO_INPUT;
@@ -577,7 +564,7 @@ static int echo_console(UI *ui)
         }
     }
 #endif
-#if defined(_WIN32) && !defined(_WIN32_WCE)
+#if defined(_WIN32)
     if (is_a_tty) {
         tty_new = tty_orig;
         SetConsoleMode(GetStdHandle(STD_INPUT_HANDLE), tty_new);
@@ -607,7 +594,6 @@ static int close_console(UI *ui)
     return ret;
 }
 
-#if !defined(OPENSSL_SYS_WINCE)
 /* Internal functions to handle signals and act on them */
 static void pushsig(void)
 {
@@ -688,7 +674,6 @@ static void recsig(int i)
 {
     intr_signal = i;
 }
-#endif
 
 /* Internal functions specific for Windows */
 #if defined(OPENSSL_SYS_MSDOS) && !defined(_WIN32)
@@ -704,11 +689,7 @@ static int noecho_fgets(char *buf, int size, FILE *tty)
             break;
         }
         size--;
-#if defined(_WIN32)
-        i = _getch();
-#else
         i = getch();
-#endif
         if (i == '\r')
             i = '\n';
         *(p++) = i;

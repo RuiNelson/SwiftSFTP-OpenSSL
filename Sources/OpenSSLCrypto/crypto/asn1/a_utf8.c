@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 1995-2021 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 1995-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -16,6 +16,7 @@
 #include "internal/cryptlib.h"
 #include "internal/unicode.h"
 #include <SwiftSFTP_OpenSSL/asn1.h>
+#include <crypto/asn1.h>
 
 /* UTF8 utilities */
 
@@ -30,10 +31,10 @@
  * -4 = character encoded incorrectly (not minimal length).
  */
 
-int UTF8_getc(const unsigned char *str, int len, unsigned long *val)
+int ossl_utf8_getc_internal(const unsigned char *str, int len, uint32_t *val)
 {
     const unsigned char *p;
-    unsigned long value;
+    uint32_t value;
     int ret;
     if (len <= 0)
         return 0;
@@ -87,6 +88,21 @@ int UTF8_getc(const unsigned char *str, int len, unsigned long *val)
     return ret;
 }
 
+#if !defined(OPENSSL_NO_DEPRECATED_4_1)
+int UTF8_getc(const unsigned char *str, int len, unsigned long *val)
+{
+    uint32_t value = 0;
+    int ret;
+
+    ret = ossl_utf8_getc_internal(str, len, &value);
+
+    if (ret)
+        *val = (unsigned long)value;
+
+    return ret;
+}
+#endif /* !defined(OPENSSL_NO_DEPRECATED_4_1) */
+
 /*
  * This takes a character 'value' and writes the UTF8 encoded value in 'str'
  * where 'str' is a buffer containing 'len' characters. Returns the number of
@@ -95,7 +111,7 @@ int UTF8_getc(const unsigned char *str, int len, unsigned long *val)
  * characters. It will need at most 4 characters.
  */
 
-int UTF8_putc(unsigned char *str, int len, unsigned long value)
+int ossl_utf8_putc_internal(unsigned char *str, int len, uint32_t value)
 {
     if (!str)
         len = 4; /* Maximum we will need */
@@ -140,3 +156,10 @@ int UTF8_putc(unsigned char *str, int len, unsigned long value)
     }
     return -2;
 }
+
+#if !defined(OPENSSL_NO_DEPRECATED_4_1)
+int UTF8_putc(unsigned char *str, int len, unsigned long value)
+{
+    return ossl_utf8_putc_internal(str, len, (uint32_t)value);
+}
+#endif

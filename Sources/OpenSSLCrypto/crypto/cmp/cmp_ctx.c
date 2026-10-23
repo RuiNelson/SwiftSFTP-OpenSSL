@@ -11,6 +11,10 @@
  * in the file LICENSE in the source distribution or at
  * https://www.openssl.org/source/license.html
  */
+#pragma GCC visibility push(default)
+
+#include <stdio.h>
+#pragma GCC visibility pop
 
 #include "cmp_local.h"
 #include <SwiftSFTP_OpenSSL/ocsp.h> /* for OCSP_REVOKED_STATUS_* */
@@ -84,11 +88,18 @@ err:
 
 static int cmp_ctx_set_md(OSSL_CMP_CTX *ctx, EVP_MD **pmd, int nid)
 {
-    EVP_MD *md = EVP_MD_fetch(ctx->libctx, OBJ_nid2sn(nid), ctx->propq);
+    const char *name = OBJ_nid2sn(nid);
+    EVP_MD *md;
+
+    if (name == NULL) {
+        ERR_raise_data(ERR_LIB_CMP, CMP_R_UNKNOWN_ALGORITHM_ID, "nid=%d", nid);
+        return 0;
+    }
+    md = EVP_MD_fetch(ctx->libctx, name, ctx->propq);
     /* fetching in advance to be able to throw error early if unsupported */
 
     if (md == NULL) {
-        ERR_raise(ERR_LIB_CMP, CMP_R_UNSUPPORTED_ALGORITHM);
+        ERR_raise_data(ERR_LIB_CMP, CMP_R_UNSUPPORTED_ALGORITHM, "name=%s,nid=%d", name, nid);
         return 0;
     }
     EVP_MD_free(*pmd);
@@ -373,11 +384,11 @@ int ossl_cmp_print_log(OSSL_CMP_severity level, const OSSL_CMP_CTX *ctx,
     if (OSSL_TRACE_ENABLED(CMP)) {
         OSSL_TRACE_BEGIN(CMP)
         {
-            int printed = BIO_snprintf(hugebuf, sizeof(hugebuf),
+            int printed = snprintf(hugebuf, sizeof(hugebuf),
                 "%s:%s:%d:" OSSL_CMP_LOG_PREFIX "%s: ",
                 func, file, line, level_str);
             if (printed > 0 && (size_t)printed < sizeof(hugebuf)) {
-                if (BIO_vsnprintf(hugebuf + printed,
+                if (vsnprintf(hugebuf + printed,
                         sizeof(hugebuf) - printed, format, args)
                     > 0)
                     res = BIO_puts(trc_out, hugebuf) > 0;
@@ -387,7 +398,7 @@ int ossl_cmp_print_log(OSSL_CMP_severity level, const OSSL_CMP_CTX *ctx,
     }
 #else /* compensate for disabled trace API */
     {
-        if (BIO_vsnprintf(hugebuf, sizeof(hugebuf), format, args) > 0)
+        if (vsnprintf(hugebuf, sizeof(hugebuf), format, args) > 0)
             res = ctx->log_cb(func, file, line, level, hugebuf);
     }
 #endif
@@ -921,6 +932,9 @@ DEFINE_set1_ASN1_OCTET_STRING(OSSL_CMP_CTX, transactionID)
     case OSSL_CMP_OPT_UNPROTECTED_ERRORS:
         ctx->unprotectedErrors = val;
         break;
+    case OSSL_CMP_OPT_NONMATCHED_ERROR_NONCES:
+        ctx->nonmatchedErrorNonces = val;
+        break;
     case OSSL_CMP_OPT_NO_CACHE_EXTRACERTS:
         ctx->noCacheExtraCerts = val;
         break;
@@ -980,7 +994,7 @@ DEFINE_set1_ASN1_OCTET_STRING(OSSL_CMP_CTX, transactionID)
         ctx->revocationReason = val;
         break;
     default:
-        ERR_raise(ERR_LIB_CMP, CMP_R_INVALID_OPTION);
+        ERR_raise_data(ERR_LIB_CMP, CMP_R_INVALID_OPTION, "%d", opt);
         return 0;
     }
 
@@ -1009,6 +1023,8 @@ int OSSL_CMP_CTX_get_option(const OSSL_CMP_CTX *ctx, int opt)
         return ctx->unprotectedSend;
     case OSSL_CMP_OPT_UNPROTECTED_ERRORS:
         return ctx->unprotectedErrors;
+    case OSSL_CMP_OPT_NONMATCHED_ERROR_NONCES:
+        return ctx->nonmatchedErrorNonces;
     case OSSL_CMP_OPT_NO_CACHE_EXTRACERTS:
         return ctx->noCacheExtraCerts;
     case OSSL_CMP_OPT_VALIDITY_DAYS:
@@ -1042,7 +1058,7 @@ int OSSL_CMP_CTX_get_option(const OSSL_CMP_CTX *ctx, int opt)
     case OSSL_CMP_OPT_REVOCATION_REASON:
         return ctx->revocationReason;
     default:
-        ERR_raise(ERR_LIB_CMP, CMP_R_INVALID_OPTION);
+        ERR_raise_data(ERR_LIB_CMP, CMP_R_INVALID_OPTION, "%d", opt);
         return -1;
     }
 }

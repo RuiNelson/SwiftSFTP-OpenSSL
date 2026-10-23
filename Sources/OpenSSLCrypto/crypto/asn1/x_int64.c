@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2017-2021 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2017-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -12,6 +12,9 @@
 #pragma GCC visibility push(default)
 
 #include <stdio.h>
+#pragma GCC visibility pop
+#pragma GCC visibility push(default)
+#include <inttypes.h>
 #pragma GCC visibility pop
 #include "internal/cryptlib.h"
 #include "internal/numbers.h"
@@ -118,8 +121,8 @@ static int uint64_print(BIO *out, const ASN1_VALUE **pval, const ASN1_ITEM *it,
     int indent, const ASN1_PCTX *pctx)
 {
     if ((it->size & INTxx_FLAG_SIGNED) == INTxx_FLAG_SIGNED)
-        return BIO_printf(out, "%jd\n", **(int64_t **)pval);
-    return BIO_printf(out, "%ju\n", **(uint64_t **)pval);
+        return BIO_printf(out, "%" PRId64 "\n", **(int64_t **)pval);
+    return BIO_printf(out, "%" PRIu64 "\n", **(uint64_t **)pval);
 }
 
 /* 32-bit variants */

@@ -1,6 +1,7 @@
 /*
  * Copyright 2024-2026 The OpenSSL Project Authors. All Rights Reserved.
- * Licensed under the OpenSSL license (the "License").  You may not use
+ *
+ * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
  * in the file LICENSE in the source distribution or at
  * https://www.openssl.org/source/license.html
@@ -14,6 +15,13 @@
 #ifndef OPENSSL_ECH_HELPERS_H
 #define OPENSSL_ECH_HELPERS_H
 #pragma once
+#pragma GCC visibility push(default)
+
+#include <stddef.h>
+#pragma GCC visibility pop
+#pragma GCC visibility push(default)
+#include <stdint.h>
+#pragma GCC visibility pop
 
 #ifndef OPENSSL_NO_ECH
 

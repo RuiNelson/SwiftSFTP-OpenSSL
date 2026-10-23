@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2007-2025 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2007-2026 The OpenSSL Project Authors. All Rights Reserved.
  * Copyright Nokia 2007-2019
  * Copyright Siemens AG 2015-2019
  *
@@ -11,6 +11,10 @@
  * in the file LICENSE in the source distribution or at
  * https://www.openssl.org/source/license.html
  */
+#pragma GCC visibility push(default)
+
+#include <stdio.h>
+#pragma GCC visibility pop
 
 #include "cmp_local.h"
 
@@ -57,7 +61,7 @@ OSSL_CMP_MSG *OSSL_CMP_MSG_http_perform(OSSL_CMP_CTX *ctx,
 
     bios = OSSL_CMP_CTX_get_transfer_cb_arg(ctx);
     if (ctx->serverPort != 0)
-        BIO_snprintf(server_port, sizeof(server_port), "%d", ctx->serverPort);
+        snprintf(server_port, sizeof(server_port), "%d", ctx->serverPort);
     tls_used = ctx->tls_used >= 0 ? ctx->tls_used != 0
                                   : OSSL_CMP_CTX_get_http_cb_arg(ctx) != NULL; /* backward compat */
     if (ctx->http_ctx == NULL) { /* using existing connection or yet not set up own connection */

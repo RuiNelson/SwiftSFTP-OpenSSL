@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2020-2024 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2020-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -18,12 +18,6 @@
 #include <SwiftSFTP_OpenSSL/obj_mac.h>
 #include "prov/securitycheck.h"
 #include "internal/nelem.h"
-
-/* Disable the security checks in the default provider */
-int ossl_fips_config_securitycheck_enabled(OSSL_LIB_CTX *libctx)
-{
-    return 0;
-}
 
 int ossl_digest_rsa_sign_get_md_nid(const EVP_MD *md)
 {

@@ -35,7 +35,7 @@
 #include "prov/securitycheck.h"
 #include "providers/implementations/keymgmt/keymgmtcommon.inc"
 #ifdef S390X_EC_ASM
-#include "s390x_arch.h"
+#include "arch/s390x_arch.h"
 #include <SwiftSFTP_OpenSSL/sha.h> /* For SHA512_DIGEST_LENGTH */
 #endif
 
@@ -1052,7 +1052,7 @@ MAKE_KEYMGMT_FUNCTIONS(ed25519)
 MAKE_KEYMGMT_FUNCTIONS(ed448)
 
 #ifdef S390X_EC_ASM
-#include "s390x_arch.h"
+#include "arch/s390x_arch.h"
 
 static void *s390x_ecx_keygen25519(struct ecx_gen_ctx *gctx)
 {

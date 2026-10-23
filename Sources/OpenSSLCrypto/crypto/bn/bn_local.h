@@ -384,7 +384,7 @@ struct bn_gencb_st {
 #include <c_asm.h>
 #pragma GCC visibility pop
 #define BN_UMULT_HIGH(a, b) (BN_ULONG)asm("umulh %a0,%a1,%v0", (a), (b))
-#elif defined(__GNUC__) && __GNUC__ >= 2
+#elif defined(__GNUC__)
 #define BN_UMULT_HIGH(a, b) ({     \
         register BN_ULONG ret;          \
         asm ("umulh     %1,%2,%0"       \
@@ -393,7 +393,7 @@ struct bn_gencb_st {
         ret; })
 #endif /* compiler */
 #elif defined(_ARCH_PPC64) && defined(SIXTY_FOUR_BIT_LONG)
-#if defined(__GNUC__) && __GNUC__ >= 2
+#if defined(__GNUC__)
 #define BN_UMULT_HIGH(a, b) ({     \
         register BN_ULONG ret;          \
         asm ("mulhdu    %0,%1,%2"       \
@@ -402,7 +402,7 @@ struct bn_gencb_st {
         ret; })
 #endif /* compiler */
 #elif (defined(__x86_64) || defined(__x86_64__)) && (defined(SIXTY_FOUR_BIT_LONG) || defined(SIXTY_FOUR_BIT))
-#if defined(__GNUC__) && __GNUC__ >= 2
+#if defined(__GNUC__)
 #define BN_UMULT_HIGH(a, b) ({     \
         register BN_ULONG ret,discard;  \
         asm ("mulq      %3"             \
@@ -426,7 +426,7 @@ unsigned __int64 _umul128(unsigned __int64 a, unsigned __int64 b,
 #define BN_UMULT_LOHI(low, high, a, b) ((low) = _umul128((a), (b), &(high)))
 #endif
 #elif defined(__mips) && (defined(SIXTY_FOUR_BIT) || defined(SIXTY_FOUR_BIT_LONG))
-#if defined(__GNUC__) && __GNUC__ >= 2
+#if defined(__GNUC__)
 #define BN_UMULT_HIGH(a, b) ({       \
         register BN_ULONG ret;          \
         asm ("dmultu    %1,%2"          \
@@ -439,7 +439,7 @@ unsigned __int64 _umul128(unsigned __int64 a, unsigned __int64 b,
         : "r"(a), "r"(b));
 #endif
 #elif defined(__aarch64__) && defined(SIXTY_FOUR_BIT_LONG)
-#if defined(__GNUC__) && __GNUC__ >= 2
+#if defined(__GNUC__)
 #define BN_UMULT_HIGH(a, b) ({     \
         register BN_ULONG ret;          \
         asm ("umulh     %0,%1,%2"       \
@@ -447,6 +447,8 @@ unsigned __int64 _umul128(unsigned __int64 a, unsigned __int64 b,
              : "r"(a), "r"(b));         \
         ret; })
 #endif
+#elif defined(__e2k__) && __iset__ >= 5
+#define BN_UMULT_HIGH(a, b) __builtin_e2k_umulhd(a, b)
 #endif /* cpu */
 #endif /* OPENSSL_NO_ASM */
 

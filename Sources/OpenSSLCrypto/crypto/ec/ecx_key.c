@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2020-2023 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2020-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -19,7 +19,7 @@
 #include "internal/common.h" /* for ossl_assert() */
 
 #ifdef S390X_EC_ASM
-#include "s390x_arch.h"
+#include "arch/s390x_arch.h"
 #endif
 
 ECX_KEY *ossl_ecx_key_new(OSSL_LIB_CTX *libctx, ECX_KEY_TYPE type, int haspubkey,
@@ -97,7 +97,7 @@ int ossl_ecx_key_up_ref(ECX_KEY *key)
 {
     int i;
 
-    if (CRYPTO_UP_REF(&key->references, &i) <= 0)
+    if (!CRYPTO_UP_REF(&key->references, &i))
         return 0;
 
     REF_PRINT_COUNT("ECX_KEY", i, key);

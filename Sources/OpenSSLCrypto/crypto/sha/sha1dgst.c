@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 1995-2022 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 1995-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -23,7 +23,7 @@
 #include <SwiftSFTP_OpenSSL/evp.h>
 #include <SwiftSFTP_OpenSSL/sha.h>
 
-/* The implementation is in crypto/md32_common.h */
+/* The implementation is in crypto/md32_common.inc */
 
 #include "sha_local.h"
 #include "crypto/sha.h"

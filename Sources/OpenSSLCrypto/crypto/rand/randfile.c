@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 1995-2025 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 1995-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -58,10 +58,7 @@
 #pragma GCC visibility push(default)
 #include <fcntl.h>
 #pragma GCC visibility pop
-#if defined(_WIN32) && !defined(_WIN32_WCE)
-#pragma GCC visibility push(default)
-#include <windows.h>
-#pragma GCC visibility pop
+#if defined(_WIN32)
 #pragma GCC visibility push(default)
 #include <io.h>
 #pragma GCC visibility pop
@@ -97,7 +94,8 @@
  * This declaration is a nasty hack to get around vms' extension to fopen for
  * passing in sharing options being disabled by /STANDARD=ANSI89
  */
-static __FILE_ptr32 (*const vms_fopen)(const char *, const char *, ...) = (__FILE_ptr32 (*)(const char *, const char *, ...))fopen;
+static __FILE_ptr32 (*const vms_fopen)(const char *, const char *, ...)
+    = (__FILE_ptr32 (*)(const char *, const char *, ...))fopen;
 #define VMS_OPEN_ATTRS \
     "shr=get,put,upd,del", "ctx=bin,stm", "rfm=stm", "rat=none", "mrs=0"
 #define openssl_fopen(fname, mode) vms_fopen((fname), (mode), VMS_OPEN_ATTRS)
@@ -299,7 +297,7 @@ const char *RAND_file_name(char *buf, size_t size)
     size_t len;
     int use_randfile = 1;
 
-#if defined(_WIN32) && defined(CP_UTF8) && !defined(_WIN32_WCE)
+#if defined(_WIN32) && defined(CP_UTF8)
     DWORD envlen;
     WCHAR *var;
 

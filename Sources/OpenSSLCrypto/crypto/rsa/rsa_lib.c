@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 1995-2025 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 1995-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -20,9 +20,10 @@
 #include <SwiftSFTP_OpenSSL/core_names.h>
 #include <SwiftSFTP_OpenSSL/evp.h>
 #include <SwiftSFTP_OpenSSL/param_build.h>
+#include "internal/common.h"
 #include "internal/cryptlib.h"
 #include "internal/refcount.h"
-#include "internal/common.h"
+#include "internal/zeroization.h"
 #include "crypto/bn.h"
 #include "crypto/evp.h"
 #include "crypto/rsa.h"
@@ -140,13 +141,8 @@ void RSA_free(RSA *r)
     CRYPTO_THREAD_lock_free(r->lock);
     CRYPTO_FREE_REF(&r->references);
 
-#ifdef OPENSSL_PEDANTIC_ZEROIZATION
-    BN_clear_free(r->n);
-    BN_clear_free(r->e);
-#else
-    BN_free(r->n);
-    BN_free(r->e);
-#endif
+    ossl_public_bn_free(r->n);
+    ossl_public_bn_free(r->e);
     BN_clear_free(r->d);
     BN_clear_free(r->p);
     BN_clear_free(r->q);
@@ -170,7 +166,7 @@ int RSA_up_ref(RSA *r)
 {
     int i;
 
-    if (CRYPTO_UP_REF(&r->references, &i) <= 0)
+    if (!CRYPTO_UP_REF(&r->references, &i))
         return 0;
 
     REF_PRINT_COUNT("RSA", i, r);
@@ -387,11 +383,11 @@ int RSA_set0_key(RSA *r, BIGNUM *n, BIGNUM *e, BIGNUM *d)
         return 0;
 
     if (n != NULL) {
-        BN_free(r->n);
+        ossl_public_bn_free(r->n);
         r->n = n;
     }
     if (e != NULL) {
-        BN_free(r->e);
+        ossl_public_bn_free(r->e);
         r->e = e;
     }
     if (d != NULL) {

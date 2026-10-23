@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 1998-2025 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 1998-2026 The OpenSSL Project Authors. All Rights Reserved.
  * Copyright (c) 2002, Oracle and/or its affiliates. All rights reserved
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
@@ -22,13 +22,6 @@
 #pragma GCC visibility push(default)
 #include <signal.h>
 #pragma GCC visibility pop
-#ifdef __WATCOMC__
-#if defined(_UNICODE) || defined(__UNICODE__)
-#define _vsntprintf _vsnwprintf
-#else
-#define _vsntprintf _vsnprintf
-#endif
-#endif
 #ifdef _MSC_VER
 #define alloca _alloca
 #endif
@@ -117,8 +110,6 @@ void OPENSSL_showfatal(const char *fmta, ...)
     /*
      * First check if it's a console application, in which case the
      * error message would be printed to standard error.
-     * Windows CE does not have a concept of a console application,
-     * so we need to guard the check.
      */
 #ifdef STD_ERROR_HANDLE
     HANDLE h;
@@ -267,9 +258,7 @@ void OPENSSL_die(const char *message, const char *file, int line)
     /*
      * Win32 abort() customarily shows a dialog, but we just did that...
      */
-#if !defined(_WIN32_WCE)
     raise(SIGABRT);
-#endif
     _exit(3);
 #endif
 }

@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2000-2023 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2000-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -96,7 +96,7 @@ int DSO_up_ref(DSO *dso)
         return 0;
     }
 
-    if (CRYPTO_UP_REF(&dso->references, &i) <= 0)
+    if (!CRYPTO_UP_REF(&dso->references, &i))
         return 0;
 
     REF_PRINT_COUNT("DSO", i, dso);

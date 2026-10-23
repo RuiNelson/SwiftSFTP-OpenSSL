@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 1995-2025 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 1995-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -11,6 +11,7 @@
  */
 
 #include "internal/e_os.h"
+#include "internal/threads_common.h"
 #include "internal/cryptlib.h"
 #include "internal/mem_alloc_utils.h"
 #include "crypto/cryptlib.h"
@@ -121,12 +122,19 @@ static void parseit(void)
 {
     char *semi = strchr(md_failstring, ';');
     char *atsign;
+    char *end;
 
     if (semi != NULL)
         *semi++ = '\0';
 
-    /* Get the count (atol will stop at the @ if there), and percentage */
-    md_count = atol(md_failstring);
+    /*
+     * Get the count (parsing stops at the '@' if present), and percentage.
+     * Ignore an unparsable/overflowing count rather than acting on garbage.
+     * Validate that the count is followed by '@' or end-of-string.
+     */
+    if (!ossl_strtol(md_failstring, &end, 10, &md_count)
+        || (*end != '\0' && *end != '@'))
+        md_count = 0;
     atsign = strchr(md_failstring, '@');
     md_fail_percent = atsign == NULL ? 0 : (int)(atof(atsign + 1) * 100 + 0.5);
 
@@ -156,7 +164,7 @@ static int shouldfail(void)
     char buff[80];
 
     if (md_tracefd > 0) {
-        BIO_snprintf(buff, sizeof(buff),
+        snprintf(buff, sizeof(buff),
             "%c C%ld %%%d R%d\n",
             shoulditfail ? '-' : '+', md_count, md_fail_percent, roll);
         len = strlen(buff);
@@ -188,10 +196,19 @@ void ossl_malloc_setup_failures(void)
             parseit();
         }
     }
-    if ((cp = getenv("OPENSSL_MALLOC_FD")) != NULL)
-        md_tracefd = atoi(cp);
-    if ((cp = getenv("OPENSSL_MALLOC_SEED")) != NULL)
-        srandom(atoi(cp));
+    if ((cp = getenv("OPENSSL_MALLOC_FD")) != NULL) {
+        int fd;
+
+        if (ossl_strtoint(cp, NULL, 10, &fd) && fd >= 0)
+            md_tracefd = fd;
+    }
+    if ((cp = getenv("OPENSSL_MALLOC_SEED")) != NULL) {
+        unsigned long seed;
+
+        /* Any value is a usable seed; just truncate it to the srandom() type. */
+        if (OPENSSL_strtoul(cp, NULL, 10, &seed))
+            srandom((unsigned int)seed);
+    }
 }
 #endif
 
@@ -200,6 +217,7 @@ void *CRYPTO_malloc(size_t num, const char *file, int line)
     void *ptr;
 
     INCREMENT(malloc_count);
+    FAILTEST();
     if (malloc_impl != CRYPTO_malloc) {
         ptr = malloc_impl(num, file, line);
         if (ptr != NULL || num == 0)
@@ -210,8 +228,9 @@ void *CRYPTO_malloc(size_t num, const char *file, int line)
     if (ossl_unlikely(num == 0))
         return NULL;
 
-    FAILTEST();
     if (allow_customize) {
+        TSAN_BENIGN(&allow_customize,
+            "allow_customize is intentionally racy");
         /*
          * Disallow customization after the first allocation. We only set this
          * if necessary to avoid a store to the same cache line on every
@@ -275,6 +294,7 @@ void *CRYPTO_realloc(void *str, size_t num, const char *file, int line)
     void *ret;
 
     INCREMENT(realloc_count);
+    FAILTEST();
     if (realloc_impl != CRYPTO_realloc) {
         ret = realloc_impl(str, num, file, line);
 
@@ -292,7 +312,6 @@ void *CRYPTO_realloc(void *str, size_t num, const char *file, int line)
         return NULL;
     }
 
-    FAILTEST();
     ret = realloc(str, num);
 
 err:

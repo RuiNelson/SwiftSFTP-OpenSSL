@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2015-2025 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2015-2026 The OpenSSL Project Authors. All Rights Reserved.
  * Copyright 2004-2014, Akamai Technologies. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
@@ -28,10 +28,10 @@
 
 #ifndef OPENSSL_NO_SECURE_MEMORY
 #if defined(_WIN32)
-#pragma GCC visibility push(default)
-#include <windows.h>
-#pragma GCC visibility pop
 #if defined(WINAPI_FAMILY_PARTITION)
+#if !defined(WINAPI_PARTITION_SYSTEM)
+#define WINAPI_PARTITION_SYSTEM 0
+#endif
 #if !WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 /*
  * While VirtualLock is available under the app partition (e.g. UWP),

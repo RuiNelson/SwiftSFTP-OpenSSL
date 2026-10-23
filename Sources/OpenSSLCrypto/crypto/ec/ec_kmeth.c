@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2015-2025 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2015-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -95,7 +95,6 @@ EC_KEY *ossl_ec_key_new_method_int(OSSL_LIB_CTX *libctx, const char *propq)
 
     ret->meth = EC_KEY_get_default_method();
     ret->version = 1;
-    ret->conv_form = POINT_CONVERSION_UNCOMPRESSED;
 
 /* No ex_data inside the FIPS provider */
 #ifndef FIPS_MODULE

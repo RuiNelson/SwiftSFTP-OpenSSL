@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2018-2025 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2018-2026 The OpenSSL Project Authors. All Rights Reserved.
  * Copyright (c) 2018-2019, Oracle and/or its affiliates.  All rights reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
@@ -111,8 +111,22 @@ const OSSL_PROVIDER *EVP_KDF_get0_provider(const EVP_KDF *kdf)
     return kdf->prov;
 }
 
-const EVP_KDF *EVP_KDF_CTX_kdf(EVP_KDF_CTX *ctx)
+const EVP_KDF *EVP_KDF_CTX_get0_kdf(const EVP_KDF_CTX *ctx)
 {
+    return ctx->meth;
+}
+
+#if !defined(OPENSSL_NO_DEPRECATED_4_1)
+const EVP_KDF *EVP_KDF_CTX_kdf(const EVP_KDF_CTX *ctx)
+{
+    return EVP_KDF_CTX_get0_kdf(ctx);
+}
+#endif /* !OPENSSL_NO_DEPRECATED_4_1 */
+
+EVP_KDF *EVP_KDF_CTX_get1_kdf(const EVP_KDF_CTX *ctx)
+{
+    if (!EVP_KDF_up_ref(ctx->meth))
+        return NULL;
     return ctx->meth;
 }
 
@@ -152,6 +166,7 @@ int EVP_KDF_derive(EVP_KDF_CTX *ctx, unsigned char *key, size_t keylen,
     return ctx->meth->derive(ctx->algctx, key, keylen, params);
 }
 
+#ifndef FIPS_MODULE
 struct convert_key {
     const char *name;
     OSSL_PARAM *param;
@@ -288,6 +303,7 @@ EVP_SKEY *EVP_KDF_derive_SKEY(EVP_KDF_CTX *ctx, EVP_SKEYMGMT *mgmt,
         EVP_SKEYMGMT_free(skeymgmt);
     return ret;
 }
+#endif /* !FIPS_MODULE */
 
 /*
  * The {get,set}_params functions return 1 if there is no corresponding

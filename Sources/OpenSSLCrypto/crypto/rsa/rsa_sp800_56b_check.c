@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2018-2024 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2018-2026 The OpenSSL Project Authors. All Rights Reserved.
  * Copyright (c) 2018-2019, Oracle and/or its affiliates.  All rights reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
@@ -107,7 +107,7 @@ int ossl_rsa_check_prime_factor_range(const BIGNUM *p, int nbits, BN_CTX *ctx)
         goto err;
 
     /* set low = (√2)(2^(nbits/2 - 1) */
-    if (!BN_copy(low, &ossl_bn_inv_sqrt_2))
+    if (BN_copy(low, &ossl_bn_inv_sqrt_2) == NULL)
         goto err;
 
     if (shift >= 0) {
