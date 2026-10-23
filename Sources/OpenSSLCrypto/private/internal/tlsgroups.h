@@ -10,6 +10,12 @@
 #ifndef OSSL_INTERNAL_TLSGROUPS_H
 #define OSSL_INTERNAL_TLSGROUPS_H
 #pragma once
+#pragma GCC visibility push(default)
+
+#include <stdint.h>
+#pragma GCC visibility pop
+
+#include <SwiftSFTP_OpenSSL/e_os2.h> /* For 'ossl_inline' */
 
 #define OSSL_TLS_GROUP_ID_sect163k1 0x0001
 #define OSSL_TLS_GROUP_ID_sect163r1 0x0002

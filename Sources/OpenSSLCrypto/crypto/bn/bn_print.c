@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 1995-2017 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 1995-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -66,10 +66,10 @@ char *BN_options(void)
     if (!init) {
         init++;
 #ifdef BN_LLONG
-        BIO_snprintf(data, sizeof(data), "bn(%zu,%zu)",
+        snprintf(data, sizeof(data), "bn(%zu,%zu)",
             sizeof(BN_ULLONG) * 8, sizeof(BN_ULONG) * 8);
 #else
-        BIO_snprintf(data, sizeof(data), "bn(%zu,%zu)",
+        snprintf(data, sizeof(data), "bn(%zu,%zu)",
             sizeof(BN_ULONG) * 8, sizeof(BN_ULONG) * 8);
 #endif
     }

@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2015-2022 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2015-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -14,10 +14,8 @@
 #include "../async_local.h"
 
 #ifdef ASYNC_WIN
-#pragma GCC visibility push(default)
 
-#include <windows.h>
-#pragma GCC visibility pop
+#include "internal/e_os.h"
 #include "internal/cryptlib.h"
 
 int ASYNC_is_capable(void)

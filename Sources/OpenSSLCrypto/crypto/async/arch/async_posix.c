@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2015-2022 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2015-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -123,7 +123,11 @@ int async_fibre_makecontext(async_fibre *fibre)
         if (fibre->fibre.uc_stack.ss_sp != NULL) {
             fibre->fibre.uc_stack.ss_size = num;
             fibre->fibre.uc_link = NULL;
+#ifndef __e2k__
             makecontext(&fibre->fibre, async_start_func, 0);
+#else
+            makecontext_e2k(&fibre->fibre, async_start_func, 0);
+#endif
             return 1;
         }
     } else {
@@ -136,6 +140,9 @@ void async_fibre_free(async_fibre *fibre)
 {
     stack_free_impl(fibre->fibre.uc_stack.ss_sp);
     fibre->fibre.uc_stack.ss_sp = NULL;
+#ifdef __e2k__
+    freecontext_e2k(&fibre->fibre);
+#endif
 }
 
 #endif

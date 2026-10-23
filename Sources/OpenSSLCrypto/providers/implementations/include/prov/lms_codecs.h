@@ -14,6 +14,7 @@
 #ifndef OPENSSL_NO_LMS
 #include <SwiftSFTP_OpenSSL/e_os2.h>
 #include "crypto/lms.h"
+#include "prov/ciphercommon.h"
 #include "prov/provider_ctx.h"
 
 __owur LMS_KEY *

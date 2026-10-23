@@ -6,6 +6,9 @@
  * in the file LICENSE in the source distribution or at
  * https://www.openssl.org/source/license.html
  */
+
+#if !defined(OSSL_LIBCRYPTO_SHA_SHA_LOCAL_H)
+#define OSSL_LIBCRYPTO_SHA_SHA_LOCAL_H
 #pragma GCC visibility push(default)
 
 #include <stdlib.h>
@@ -53,7 +56,9 @@ static void sha1_block_data_order(SHA_CTX *c, const void *p, size_t num);
 void sha1_block_data_order(SHA_CTX *c, const void *p, size_t num);
 #endif
 
-#include "crypto/md32_common.h"
+/* clang-format off */
+#include "crypto/md32_common.inc"
+/* clang-format on */
 #undef HASH_UPDATE_THUNK
 
 int SHA1_Update(SHA_CTX *c, const void *data, size_t len)
@@ -442,3 +447,5 @@ static void HASH_BLOCK_DATA_ORDER(SHA_CTX *c, const void *p, size_t num)
 #endif
 
 #endif
+
+#endif /* !defined(OSSL_LIBCRYPTO_SHA_SHA_LOCAL_H) */

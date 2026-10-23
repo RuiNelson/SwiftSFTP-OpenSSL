@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2021 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2017-2026 The OpenSSL Project Authors. All Rights Reserved.
  * Copyright 2017 Ribose Inc. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
@@ -12,6 +12,10 @@
 #ifndef OSSL_INTERNAL_SM3_H
 #define OSSL_INTERNAL_SM3_H
 #pragma once
+#pragma GCC visibility push(default)
+
+#include <stddef.h>
+#pragma GCC visibility pop
 
 #include <SwiftSFTP_OpenSSL/opensslconf.h>
 

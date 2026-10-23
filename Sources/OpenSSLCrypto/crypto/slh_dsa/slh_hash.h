@@ -12,6 +12,9 @@
 #pragma once
 
 #include <SwiftSFTP_OpenSSL/e_os2.h>
+
+#include "crypto/slh_dsa.h"
+
 #include "slh_adrs.h"
 #include "internal/packet.h"
 

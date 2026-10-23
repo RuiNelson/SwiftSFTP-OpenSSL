@@ -9,16 +9,7 @@
  * in the file LICENSE in the source distribution or at
  * https://www.openssl.org/source/license.html
  */
-#pragma GCC visibility push(default)
 
-#include <stdlib.h>
-#pragma GCC visibility pop
-#pragma GCC visibility push(default)
-#include <stdarg.h>
-#pragma GCC visibility pop
-#pragma GCC visibility push(default)
-#include <string.h>
-#pragma GCC visibility pop
 #include <SwiftSFTP_OpenSSL/evp.h>
 #include <SwiftSFTP_OpenSSL/kdf.h>
 #include <SwiftSFTP_OpenSSL/sha.h>
@@ -26,8 +17,6 @@
 #include <SwiftSFTP_OpenSSL/proverr.h>
 #include "internal/cryptlib.h"
 #include "internal/fips.h"
-#include "internal/numbers.h"
-#include "crypto/evp.h"
 #include "prov/provider_ctx.h"
 #include "prov/providercommon.h"
 #include "prov/implementations.h"
@@ -183,7 +172,11 @@ static int kdf_snmpkdf_set_ctx_params(void *vctx, const OSSL_PARAM params[])
             return 0;
 #ifdef FIPS_MODULE
         md = ossl_prov_digest_md(&ctx->digest);
-        if (!EVP_MD_is_a(md, SN_sha1))
+        if (!EVP_MD_is_a(md, SN_sha1)
+            && !EVP_MD_is_a(md, SN_sha224)
+            && !EVP_MD_is_a(md, SN_sha256)
+            && !EVP_MD_is_a(md, SN_sha384)
+            && !EVP_MD_is_a(md, SN_sha512))
             return 0;
 #endif
     }
@@ -302,6 +295,7 @@ static int SNMPKDF(const EVP_MD *evp_md,
     size_t mdsize = 0, len = 0;
     unsigned int md_len = 0;
     int ret = 0;
+    int value = 0;
 
     /* Limited to SHA-1 and SHA-2 hashes presently */
     if (okey == NULL || keylen == 0)
@@ -313,9 +307,10 @@ static int SNMPKDF(const EVP_MD *evp_md,
         goto err;
     }
 
-    mdsize = EVP_MD_get_size(evp_md);
-    if (mdsize <= 0 || mdsize > keylen)
+    value = EVP_MD_get_size(evp_md);
+    if (value <= 0 || (size_t)value > keylen)
         goto err;
+    mdsize = (size_t)value;
 
     if (!EVP_DigestInit_ex(md, evp_md, NULL))
         goto err;
@@ -334,7 +329,7 @@ static int SNMPKDF(const EVP_MD *evp_md,
         || !EVP_DigestFinal_ex(md, digest, &md_len))
         goto err;
 
-    memcpy(okey, digest, md_len);
+    memcpy(okey, digest, (keylen < md_len) ? keylen : md_len);
 
     ret = 1;
 

@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 1995-2024 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 1995-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -35,7 +35,7 @@ static char *x509_cert_fileptr = NULL;
 
 static void get_windows_default_path(char *pathname, const char *suffix)
 {
-    char *ossldir;
+    const char *ossldir;
 
     ossldir = ossl_get_openssldir();
 

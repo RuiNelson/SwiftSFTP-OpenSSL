@@ -20,6 +20,7 @@
 #include <string.h>
 #pragma GCC visibility pop
 #include <SwiftSFTP_OpenSSL/objects.h>
+#include "internal/e_os.h"
 #include "internal/comp.h"
 #include <SwiftSFTP_OpenSSL/err.h>
 #include "crypto/cryptlib.h"
@@ -75,12 +76,6 @@ static COMP_METHOD zlib_stateful_method = {
  * work.  Therefore, all ZLIB routines are loaded at run time
  * and we do not link to a .LIB file when ZLIB_SHARED is set.
  */
-#if defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_WIN32)
-#pragma GCC visibility push(default)
-#include <windows.h>
-#pragma GCC visibility pop
-#endif /* !(OPENSSL_SYS_WINDOWS || \
-        * OPENSSL_SYS_WIN32) */
 
 #ifdef ZLIB_SHARED
 #include "internal/dso.h"

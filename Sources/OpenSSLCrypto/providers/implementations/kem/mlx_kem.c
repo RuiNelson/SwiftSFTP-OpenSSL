@@ -9,10 +9,7 @@
  * in the file LICENSE in the source distribution or at
  * https://www.openssl.org/source/license.html
  */
-#pragma GCC visibility push(default)
 
-#include <string.h>
-#pragma GCC visibility pop
 #include <SwiftSFTP_OpenSSL/core_dispatch.h>
 #include <SwiftSFTP_OpenSSL/core_names.h>
 #include <SwiftSFTP_OpenSSL/crypto.h>
@@ -22,7 +19,6 @@
 #include <SwiftSFTP_OpenSSL/params.h>
 #include <SwiftSFTP_OpenSSL/proverr.h>
 #include <SwiftSFTP_OpenSSL/rand.h>
-#include "internal/cryptlib.h"
 #include "prov/implementations.h"
 #include "prov/names.h"
 #include "prov/mlx_kem.h"

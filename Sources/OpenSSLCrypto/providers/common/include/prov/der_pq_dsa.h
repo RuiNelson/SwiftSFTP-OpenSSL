@@ -7,5 +7,17 @@
  * https://www.openssl.org/source/license.html
  */
 
+#if !defined(OSSL_PROVIDERS_COMMON_INCLUDE_PROV_DER_PQ_DSA_H)
+#define OSSL_PROVIDERS_COMMON_INCLUDE_PROV_DER_PQ_DSA_H
+#pragma GCC visibility push(default)
+
+#include <stddef.h>
+#pragma GCC visibility pop
+#pragma GCC visibility push(default)
+#include <stdint.h>
+#pragma GCC visibility pop
+
 int ossl_der_oid_pq_dsa_prehash_digest(const char *oid_digest_name,
     const uint8_t **oid, size_t *oidlen, size_t *sz);
+
+#endif /* !defined(OSSL_PROVIDERS_COMMON_INCLUDE_PROV_DER_PQ_DSA_H) */

@@ -25,6 +25,7 @@
 #include <string.h>
 #pragma GCC visibility pop
 #include <SwiftSFTP_OpenSSL/objects.h>
+#include "internal/e_os.h"
 #include "internal/comp.h"
 #include <SwiftSFTP_OpenSSL/err.h>
 #include "crypto/cryptlib.h"
@@ -71,18 +72,6 @@ static ZSTD_customMem zstd_mem_funcs = {
     zstd_free,
     NULL
 };
-#endif
-
-/*
- * When OpenSSL is built on Windows, we do not want to require that
- * the LIBZSTD.DLL be available in order for the OpenSSL DLLs to
- * work.  Therefore, all ZSTD routines are loaded at run time
- * and we do not link to a .LIB file when ZSTD_SHARED is set.
- */
-#if defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_WIN32)
-#pragma GCC visibility push(default)
-#include <windows.h>
-#pragma GCC visibility pop
 #endif
 
 #ifdef ZSTD_SHARED

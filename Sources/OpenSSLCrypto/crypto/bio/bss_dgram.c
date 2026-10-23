@@ -21,7 +21,6 @@
 #include <errno.h>
 #pragma GCC visibility pop
 
-#include "internal/time.h"
 #include "bio_local.h"
 #ifndef OPENSSL_NO_DGRAM
 
@@ -224,21 +223,7 @@ static const BIO_METHOD methods_dgramp_sctp = {
     NULL, /* sendmmsg */
     NULL, /* recvmmsg */
 };
-#endif
 
-typedef struct bio_dgram_data_st {
-    BIO_ADDR peer;
-    BIO_ADDR local_addr;
-    unsigned int connected;
-    unsigned int _errno;
-    unsigned int mtu;
-    OSSL_TIME next_timeout;
-    OSSL_TIME socket_timeout;
-    unsigned int peekmode;
-    char local_addr_enabled;
-} bio_dgram_data;
-
-#ifndef OPENSSL_NO_SCTP
 typedef struct bio_dgram_sctp_save_message_st {
     BIO *bio;
     char *data;
@@ -2832,6 +2817,9 @@ int BIO_dgram_non_fatal_error(int err)
 {
     switch (err) {
 #if defined(OPENSSL_SYS_WINDOWS)
+#if defined(WSAETIMEDOUT)
+    case WSAETIMEDOUT:
+#endif
 #if defined(WSAEWOULDBLOCK)
     case WSAEWOULDBLOCK:
 #endif

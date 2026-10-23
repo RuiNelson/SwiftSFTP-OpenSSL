@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2022-2025 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2022-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -76,9 +76,6 @@ static void ossl_sleep_millis(uint64_t millis)
 
 #endif
 #elif defined(_WIN32) && !defined(OPENSSL_SYS_UEFI)
-#pragma GCC visibility push(default)
-#include <windows.h>
-#pragma GCC visibility pop
 
 static void ossl_sleep_millis(uint64_t millis)
 {

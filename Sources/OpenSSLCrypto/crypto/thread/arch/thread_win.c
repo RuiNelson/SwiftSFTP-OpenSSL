@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2019-2025 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2019-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -10,14 +10,12 @@
  * https://www.openssl.org/source/license.html
  */
 
-#include <internal/thread_arch.h>
+#include "internal/thread_arch.h"
+#include "internal/e_os.h"
 
 #if defined(OPENSSL_THREADS_WINNT)
 #pragma GCC visibility push(default)
 #include <process.h>
-#pragma GCC visibility pop
-#pragma GCC visibility push(default)
-#include <windows.h>
 #pragma GCC visibility pop
 
 static unsigned __stdcall thread_start_thunk(LPVOID vthread)
@@ -599,10 +597,4 @@ void ossl_crypto_condvar_free(CRYPTO_CONDVAR **cv)
 }
 
 #endif
-
-void ossl_crypto_mem_barrier(void)
-{
-    MemoryBarrier();
-}
-
 #endif

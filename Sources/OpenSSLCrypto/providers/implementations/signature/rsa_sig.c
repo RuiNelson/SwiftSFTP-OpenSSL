@@ -17,6 +17,9 @@
 #include "internal/deprecated.h"
 #pragma GCC visibility push(default)
 
+#include <stdio.h>
+#pragma GCC visibility pop
+#pragma GCC visibility push(default)
 #include <string.h>
 #pragma GCC visibility pop
 #include <SwiftSFTP_OpenSSL/crypto.h>
@@ -429,7 +432,7 @@ static int rsa_setup_md(PROV_RSA_CTX *ctx, const char *mdname,
                     OSSL_FIPS_IND_SETTABLE1,
                     ctx->libctx,
                     md_nid, sha1_allowed, 1, desc,
-                    ossl_fips_config_signature_digest_check))
+                    FIPS_CONFIG_SIGNATURE_DIGEST_CHECK))
                 goto err;
         }
 #endif
@@ -661,7 +664,7 @@ static int rsa_pss_saltlen_check_passed(PROV_RSA_CTX *ctx, const char *algoname,
         if (!OSSL_FIPS_IND_ON_UNAPPROVED(ctx, OSSL_FIPS_IND_SETTABLE3,
                 ctx->libctx,
                 algoname, "PSS Salt Length",
-                ossl_fips_config_rsa_pss_saltlen_check)) {
+                FIPS_CONFIG_RSA_PSS_SALTLEN_CHECK)) {
             ERR_raise(ERR_LIB_PROV, PROV_R_INVALID_SALT_LENGTH);
             return 0;
         }
@@ -1494,10 +1497,10 @@ static int rsa_get_ctx_params(void *vprsactx, OSSL_PARAM *params)
                 value = OSSL_PKEY_RSA_PSS_SALT_LEN_AUTO_DIGEST_MAX;
                 break;
             default: {
-                int len = BIO_snprintf(p.slen->data, p.slen->data_size, "%d",
+                int len = snprintf(p.slen->data, p.slen->data_size, "%d",
                     prsactx->saltlen);
 
-                if (len <= 0)
+                if (len <= 0 || (size_t)len >= p.slen->data_size)
                     return 0;
                 p.slen->return_size = len;
                 break;
@@ -1535,7 +1538,7 @@ static int rsa_x931_padding_allowed(PROV_RSA_CTX *ctx)
         if (!OSSL_FIPS_IND_ON_UNAPPROVED(ctx, OSSL_FIPS_IND_SETTABLE2,
                 ctx->libctx,
                 "RSA Sign set ctx", "X931 Padding",
-                ossl_fips_config_rsa_sign_x931_disallowed)) {
+                FIPS_CONFIG_RSA_SIGN_X931_PAD_DISABLED)) {
             ERR_raise(ERR_LIB_PROV,
                 PROV_R_ILLEGAL_OR_UNSUPPORTED_PADDING_MODE);
             return 0;
@@ -1701,8 +1704,11 @@ static int rsa_set_ctx_params(void *vprsactx, const OSSL_PARAM params[])
                 saltlen = RSA_PSS_SALTLEN_AUTO;
             else if (strcmp(p.slen->data, OSSL_PKEY_RSA_PSS_SALT_LEN_AUTO_DIGEST_MAX) == 0)
                 saltlen = RSA_PSS_SALTLEN_AUTO_DIGEST_MAX;
-            else
-                saltlen = atoi(p.slen->data);
+            else if (!ossl_strtoint(p.slen->data, NULL, 10, &saltlen)) {
+                ERR_raise_data(ERR_LIB_PROV, PROV_R_INVALID_SALT_LENGTH,
+                    "invalid RSA-PSS saltlen value");
+                return 0;
+            }
         }
 
         /*

@@ -62,6 +62,9 @@ def generate(directory):
     environment = os.environ.copy()
     # Reproducible source metadata, independent of the maintainer's machine/date.
     environment["SOURCE_DATE_EPOCH"] = "0"
+    # OpenSSL 4.1 configures the apps header even with no-apps, but does
+    # not create its output directory for an out-of-tree build.
+    (directory / "apps/include").mkdir(parents=True, exist_ok=True)
     run(["perl", str(UPSTREAM / "Configure"), "linux-generic64", *OPTIONS],
         directory, environment)
     run(["make", "-j8", "build_generated", "crypto/buildinf.h"], directory, environment)

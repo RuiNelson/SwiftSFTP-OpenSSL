@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2000-2021 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2000-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -143,15 +143,12 @@ static int asn1_item_print_ctx(BIO *out, const ASN1_VALUE **fld, int indent,
     const ASN1_EXTERN_FUNCS *ef;
     const ASN1_VALUE **tmpfld;
     const ASN1_AUX *aux = it->funcs;
-    ASN1_aux_const_cb *asn1_cb = NULL;
     ASN1_PRINT_ARG parg;
     int i;
     if (aux != NULL) {
         parg.out = out;
         parg.indent = indent;
         parg.pctx = pctx;
-        asn1_cb = ((aux->flags & ASN1_AFLG_CONST_CB) != 0) ? aux->asn1_const_cb
-                                                           : (ASN1_aux_const_cb *)aux->asn1_cb; /* backward compatibility */
     }
 
     if (((it->itype != ASN1_ITYPE_PRIMITIVE)
@@ -225,13 +222,11 @@ static int asn1_item_print_ctx(BIO *out, const ASN1_VALUE **fld, int indent,
             }
         }
 
-        if (asn1_cb) {
-            i = asn1_cb(ASN1_OP_PRINT_PRE, fld, it, &parg);
-            if (i == 0)
-                return 0;
-            if (i == 2)
-                return 1;
-        }
+        i = ossl_asn1_call_aux_cb(aux, ASN1_OP_PRINT_PRE, fld, it, &parg);
+        if (i == 0)
+            return 0;
+        if (i == 2)
+            return 1;
 
         /* Print each field entry */
         for (i = 0, tt = it->templates; i < it->tcount; i++, tt++) {
@@ -249,11 +244,9 @@ static int asn1_item_print_ctx(BIO *out, const ASN1_VALUE **fld, int indent,
                 return 0;
         }
 
-        if (asn1_cb) {
-            i = asn1_cb(ASN1_OP_PRINT_POST, fld, it, &parg);
-            if (i == 0)
-                return 0;
-        }
+        i = ossl_asn1_call_aux_cb(aux, ASN1_OP_PRINT_POST, fld, it, &parg);
+        if (i == 0)
+            return 0;
         break;
 
     default:

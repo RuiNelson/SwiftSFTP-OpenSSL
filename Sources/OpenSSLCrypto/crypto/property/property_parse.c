@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2019-2025 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2019-2026 The OpenSSL Project Authors. All Rights Reserved.
  * Copyright (c) 2019, Oracle and/or its affiliates.  All rights reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
@@ -694,7 +694,7 @@ static void put_num(int64_t val, char **buf, size_t *remain, size_t *needed)
     if (*remain == 0)
         return;
 
-    BIO_snprintf(*buf, *remain, "%lld", (long long int)val);
+    snprintf(*buf, *remain, "%lld", (long long int)val);
     if (*remain < len) {
         *buf += *remain;
         *remain = 0;

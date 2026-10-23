@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2011-2021 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2011-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -29,7 +29,7 @@ static int bn_x931_derive_pi(BIGNUM *pi, const BIGNUM *Xpi, BN_CTX *ctx,
     BN_GENCB *cb)
 {
     int i = 0, is_prime;
-    if (!BN_copy(pi, Xpi))
+    if (BN_copy(pi, Xpi) == NULL)
         return 0;
     if (!BN_is_odd(pi) && !BN_add_word(pi, 1))
         return 0;
@@ -126,7 +126,7 @@ int BN_X931_derive_prime_ex(BIGNUM *p, BIGNUM *p1, BIGNUM *p2,
     for (;;) {
         int i = 1;
         BN_GENCB_call(cb, 0, i++);
-        if (!BN_copy(pm1, p))
+        if (BN_copy(pm1, p) == NULL)
             goto err;
         if (!BN_sub_word(pm1, 1))
             goto err;

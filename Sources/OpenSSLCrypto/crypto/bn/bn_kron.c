@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2000-2016 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2000-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -41,10 +41,10 @@ int BN_kronecker(const BIGNUM *a, const BIGNUM *b, BN_CTX *ctx)
     if (B == NULL)
         goto end;
 
-    err = !BN_copy(A, a);
+    err = (BN_copy(A, a) == NULL);
     if (err)
         goto end;
-    err = !BN_copy(B, b);
+    err = (BN_copy(B, b) == NULL);
     if (err)
         goto end;
 

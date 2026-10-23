@@ -11,15 +11,6 @@
  */
 #pragma GCC visibility push(default)
 
-#include <stdlib.h>
-#pragma GCC visibility pop
-#pragma GCC visibility push(default)
-#include <stdarg.h>
-#pragma GCC visibility pop
-#pragma GCC visibility push(default)
-#include <string.h>
-#pragma GCC visibility pop
-#pragma GCC visibility push(default)
 #include <stdbool.h>
 #pragma GCC visibility pop
 #include <SwiftSFTP_OpenSSL/evp.h>
@@ -29,8 +20,6 @@
 #include <SwiftSFTP_OpenSSL/proverr.h>
 #include "internal/cryptlib.h"
 #include "internal/fips.h"
-#include "internal/numbers.h"
-#include "crypto/evp.h"
 #include "prov/provider_ctx.h"
 #include "prov/providercommon.h"
 #include "prov/implementations.h"
@@ -319,7 +308,12 @@ static int kdf_srtpkdf_get_ctx_params(void *vctx, OSSL_PARAM params[])
         return 0;
 
     if (p.size != NULL) {
-        size_t sz = EVP_CIPHER_key_length(ossl_prov_cipher_cipher(&ctx->cipher));
+        const EVP_CIPHER *cipher = ossl_prov_cipher_cipher(&ctx->cipher);
+        size_t sz;
+
+        if (cipher == NULL)
+            return 0;
+        sz = EVP_CIPHER_key_length(cipher);
 
         if (!OSSL_PARAM_set_size_t(p.size, sz))
             return 0;

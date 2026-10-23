@@ -11,6 +11,9 @@
  */
 #pragma GCC visibility push(default)
 
+#include <stdio.h>
+#pragma GCC visibility pop
+#pragma GCC visibility push(default)
 #include <string.h>
 #pragma GCC visibility pop
 #include <SwiftSFTP_OpenSSL/err.h>
@@ -20,7 +23,7 @@ void ERR_new(void)
 {
     ERR_STATE *es;
 
-    es = ossl_err_get_state_int();
+    es = ossl_err_get_state_int(1);
     if (es == NULL)
         return;
 
@@ -33,7 +36,7 @@ void ERR_set_debug(const char *file, int line, const char *func)
 {
     ERR_STATE *es;
 
-    es = ossl_err_get_state_int();
+    es = ossl_err_get_state_int(1);
     if (es == NULL)
         return;
 
@@ -57,7 +60,7 @@ void ERR_vset_error(int lib, int reason, const char *fmt, va_list args)
     unsigned long flags = 0;
     size_t i;
 
-    es = ossl_err_get_state_int();
+    es = ossl_err_get_state_int(1);
     if (es == NULL)
         return;
     i = es->top;
@@ -90,9 +93,9 @@ void ERR_vset_error(int lib, int reason, const char *fmt, va_list args)
         }
 
         if (buf != NULL) {
-            printed_len = BIO_vsnprintf(buf, buf_size, fmt, args);
+            printed_len = vsnprintf(buf, buf_size, fmt, args);
         }
-        if (printed_len < 0)
+        if (printed_len < 0 || (size_t)printed_len >= buf_size)
             printed_len = 0;
         if (buf != NULL)
             buf[printed_len] = '\0';

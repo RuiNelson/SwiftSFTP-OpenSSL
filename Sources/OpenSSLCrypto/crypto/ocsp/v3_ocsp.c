@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2000-2021 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2000-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -148,7 +148,7 @@ static void *ocsp_nonce_new(void)
 static int i2d_ocsp_nonce(const void *a, unsigned char **pp)
 {
     const ASN1_OCTET_STRING *os = a;
-    if (pp) {
+    if (pp != NULL && os->length > 0) {
         memcpy(*pp, os->data, os->length);
         *pp += os->length;
     }
@@ -169,7 +169,8 @@ static void *d2i_ocsp_nonce(void *a, const unsigned char **pp, long length)
     if (!ASN1_OCTET_STRING_set(os, *pp, length))
         goto err;
 
-    *pp += length;
+    if (length > 0)
+        *pp += length;
 
     if (pos)
         *pos = os;

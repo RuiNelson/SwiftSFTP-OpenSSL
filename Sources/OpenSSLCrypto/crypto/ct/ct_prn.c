@@ -2,7 +2,7 @@
 #pragma GCC visibility push(hidden)
 #define STATIC_LEGACY
 /*
- * Copyright 2016-2025 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2016-2026 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -13,6 +13,10 @@
 #ifdef OPENSSL_NO_CT
 #error "CT is disabled"
 #endif
+#pragma GCC visibility push(default)
+
+#include <stdio.h>
+#pragma GCC visibility pop
 
 #include <SwiftSFTP_OpenSSL/asn1.h>
 #include <SwiftSFTP_OpenSSL/bio.h>
@@ -43,7 +47,7 @@ static void timestamp_print(uint64_t timestamp, BIO *out)
      * Note GeneralizedTime from ASN1_GENERALIZETIME_adj is always 15
      * characters long with a final Z. Update it with fractional seconds.
      */
-    BIO_snprintf(genstr, sizeof(genstr), "%.14s.%03dZ",
+    snprintf(genstr, sizeof(genstr), "%.14s.%03dZ",
         ASN1_STRING_get0_data(gen), (unsigned int)(timestamp % 1000));
     if (ASN1_GENERALIZEDTIME_set_string(gen, genstr))
         ASN1_GENERALIZEDTIME_print(out, gen);
