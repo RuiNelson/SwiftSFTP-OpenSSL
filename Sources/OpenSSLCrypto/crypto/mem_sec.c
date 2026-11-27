@@ -76,9 +76,13 @@ BOOL
 #include <sys/syscall.h>
 #pragma GCC visibility pop
 #if defined(SYS_mlock2)
+#if defined(__has_include)
+#if __has_include(<linux/mman.h>)
 #pragma GCC visibility push(default)
 #include <linux/mman.h>
 #pragma GCC visibility pop
+#endif
+#endif
 #pragma GCC visibility push(default)
 #include <errno.h>
 #pragma GCC visibility pop

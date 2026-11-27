@@ -43,6 +43,11 @@ def adapt(contents):
                       r'\1private/\2/\3\4', contents)
     # These are textual implementations, not independent translation units.
     contents = re.sub(r'(#\s*include\s*"[^"\n]+)\.c"', r'\1.inc"', contents)
+    # musl's SDK has no kernel headers such as <linux/mman.h>. Without it the secure heap keeps using mlock(): the
+    # MLOCK_ONFAULT code that needs the header is already guarded by the macro it defines.
+    contents = contents.replace("#include <linux/mman.h>",
+                                "#if defined(__has_include)\n#if __has_include(<linux/mman.h>)\n"
+                                "#include <linux/mman.h>\n#endif\n#endif")
     # Do not hide imports from libc, pthreads, or platform frameworks along
     # with our own declarations. Hidden undefined system symbols cannot link.
     def system_include(match):

@@ -665,7 +665,7 @@
     "crypto/mdc2/mdc2dgst.c": "7816617560a9c17697455b146eaf120fd3f4dfe2e14bfc8d08f30149e364b359",
     "crypto/mem.c": "aa8aefdb1564e617c93a492ef266aee10e75ae367d542968d6dd312b121ee682",
     "crypto/mem_clr.c": "79a350142207ee26a80abff8993f6aa3bdf9cd127e9cd9f89db7447b42f996a0",
-    "crypto/mem_sec.c": "1387fd02da7fad159d734092a70b3b1556a9e5242f7f9aab6dcebb2830ba9dba",
+    "crypto/mem_sec.c": "7671b486d66f688cad83e75a950064d2430cc196c28f06642bcf6ca3a5c06532",
     "crypto/ml_dsa/asm/mldsa_ppc_macros_asm.inc": "abb3f2af9bfdec266d54aacf3374808ce041cccc4fcf996874e432448f0d50d2",
     "crypto/ml_dsa/ml_dsa_encoders.c": "bc6f25e7b3a5854396661d6f473873b71b8d2515efa065f6175cb3853d8233d3",
     "crypto/ml_dsa/ml_dsa_hash.h": "86c59eeb09a5b8b1e3cb4c741496f488d7984dd4aa8921eac1e2c20078d4009e",
